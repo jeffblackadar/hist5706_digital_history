@@ -11,7 +11,7 @@ See the Installation section in this [tutorial](https://mesa.readthedocs.io/en/s
 ## Mill model
 This is a prototype model meant try out Mesa and build a basic model of consumption of wood in a forested area.
 
-[Documentation](/docs/doc_mill.html)
+[Documentation](https://jeffblackadar.github.io/hist5706_digital_history/)
 
 ### Installation
 
