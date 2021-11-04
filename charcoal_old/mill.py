@@ -2,6 +2,16 @@ from mesa import Agent
 
 
 class Mill(Agent):
+    """Summary of class here.
+
+    Longer class information....
+    Longer class information....
+
+    Attributes:
+        likes_spam: A boolean indicating if we like SPAM or not.
+        eggs: An integer count of the eggs we have laid.
+    """
+
     STOPPED = 0
     RUNNING = 1
     MAXCUT=3
@@ -12,14 +22,24 @@ class Mill(Agent):
         """
         super().__init__(pos, model)
         self.x, self.y = pos
+        # +int x position
+        # +int y
         self.state = init_state
+        # +int state 1=running
         self._nextState = None
+        # +int _nextState The state this will be at the end of a step
         self.isConsidered = False
+        # +bool isConsidered Determines if this is considered for processing.
         self.color = "black"
+        # +str color The background color of the cell
         self.cells_cut = 0
+        # +int cells_cut The number of land_cells the mill has cut or harvested
         self.max_cut = max_cut
+        # +int max_cut The maximum number of cells cut in a year
         self.mill_radius = mill_radius
+        # +int mill_radius The maximum distance from the mill wood is cut
         self.type = "mill"
+        # +str type The type of this agent (mill)
 
 
     @property
@@ -51,8 +71,7 @@ class Mill(Agent):
         When a cell is made alive, its neighbors are able to be considered in the next step. Only cells that are considered check their neighbors for performance reasons.
         """
         # assume no state change
-        self._nextState = self.state
-        
+        self._nextState = self.state        
 
         self.cells_cut = 0
         if self.state > 0:
@@ -70,11 +89,9 @@ class Mill(Agent):
             print("Mill is out of business!")
             self.color = "grey"
 
-
-
-
     def advance(self):
         """
         Set the state to the new computed state -- computed in step().
         """
         self.state = self._nextState
+

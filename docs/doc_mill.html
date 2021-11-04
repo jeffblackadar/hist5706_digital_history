@@ -1,0 +1,86 @@
+
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+<h1>Mill Model</h1>
+<h2>Model: MillMap class</h2>
+
+    </p> Map:
+    Represents the hex grid of cells. The grid is represented by a 2-dimensional array of cells with adjacency rules specific to hexagons.
+
+    </p> Mill:
+    The saw mill is at the center of the map.
+    When the mill's loggers cut down the forest in a neighbouring cell, that cell's forest's age becomes 0. 
+    For the mill to stay running, it needs to harvest a set number of mature forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and it state changes to 0 (stopped/closed)
+
+    </p> land Cell:
+    Each hexagon represents a single area of forest in the simulation.
+    
+    The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
+    The land cell where the mill is is not a forest.
+    The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age. 
+            <div class="mermaid">
+classDiagram
+    class MillMap
+MillMap : +__init__(self, height=50, width=50, max_cut=2, mill_radius=3, forest_age_maturity=30)
+MillMap : +object grid HexGrid a grid to represent the map.
+MillMap : +step(self)
+        </div>
+<h2>Agent: Mill class</h2>
+
+    The saw mill is at the center of the map.
+    When the mill's loggers cut down the forest in a neighbouring cell, that cell's forest's age becomes 0 and is not mature. 
+    For the mill to stay running, it needs to harvest a set number of forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and it state changes to 0 (stopped/closed)    
+    
+    Attributes:
+        See comments below in __init__
+            <div class="mermaid">
+classDiagram
+    class Mill
+Mill : +__init__(self, pos, model, init_state=RUNNING, max_cut=MAXCUT, mill_radius=3)
+Mill :  +int x position
+Mill :  +int y
+Mill :  +int state 1=running 0=stopped/closed
+Mill :  +int _nextState The state this will be at the end of a step
+Mill :  +bool isConsidered Determines if this is considered for processing.
+Mill :  +int cells_cut The number of land_cells the mill has cut or harvested
+Mill :  +int max_cut The maximum number of cells cut in a year
+Mill :  +int mill_radius The maximum distance from the mill wood is cut
+Mill : +neighbors(self)
+Mill : +neighbors_outer(self, radius)
+Mill : +state_text(self)
+Mill : +considered(self)
+Mill : +step(self)
+Mill : +advance(self)
+        </div>
+<h2>Agent: landCell class</h2>
+ 
+    Represents a single area of forest in the simulation.
+
+    The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
+    The land cell where the mill is is not a forest.
+    The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age.    
+    
+    Attributes:
+        See comments below in __init__
+            <div class="mermaid">
+classDiagram
+    class LandCell
+LandCell : +__init__(self, pos, model, init_state=FORESTMATURE, init_age=100, init_color="grey")
+LandCell :  +int x position
+LandCell :  +int y
+LandCell :  +int state 1=running
+LandCell :  +int forest_age
+LandCell :  +int _nextState The state this will be at the end of a step
+LandCell :  +bool isConsidered Determines if this is considered for processing.
+LandCell : +setColor(self)
+LandCell : +isForest(self)
+LandCell : +isForestMature(self)
+LandCell : +neighbors(self)
+LandCell : +considered(self)
+LandCell : +step(self)
+LandCell : +advance(self)
+        </div>
+  </body>
+</html>

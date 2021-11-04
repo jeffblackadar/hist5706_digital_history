@@ -35,8 +35,9 @@ class CharcoalMap(Model):
 
         # Use a hexagonal grid, where edges don't wrap around (it's a map of a part of the earth's surface).
         self.grid = HexGrid(height, width, torus=False)
+        #+object grid HexGrid a grid to represent the map.
 
-        self.cellsConsumed = 0
+        #self.cellsConsumed = 0
         self.forest_age_maturity = forest_age_maturity
         self.total_cut = 0
 
@@ -75,6 +76,6 @@ class CharcoalMap(Model):
         Have the scheduler advance each cell by one step
         """
         self.schedule.step()
-        self.cellsConsumed = 0
+        #self.cellsConsumed = 0
         self.total_cut = self.total_cut + self.mill.cells_cut
         self.datacollector.collect(self)

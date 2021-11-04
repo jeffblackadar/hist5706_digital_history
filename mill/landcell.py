@@ -2,15 +2,16 @@ from mesa import Agent
 
 
 class LandCell(Agent):
-    """Represents a single ALIVE or DEAD cell in the simulation."""
+    """ 
+    Represents a single area of forest in the simulation.
 
-    DEAD = 0
-    ALIVE = 1
-
-    # Hearth state
-    NONE=0
-    ACTIVE=1
-    INACTIVE=2
+    The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
+    The land cell where the mill is is not a forest.
+    The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age.    
+    
+    Attributes:
+        See comments below in __init__
+    """
 
     # Forest State
     NOTFOREST=0
@@ -18,21 +19,26 @@ class LandCell(Agent):
     FORESTCUT=2
     FORESTYOUNG=3
 
-    #FORESTAGEMATURE = 20
-
-
     def __init__(self, pos, model, init_state=FORESTMATURE, init_age=100, init_color="grey"):
         """
         Create a cell, in the given state, at the given x, y position.
         """
         super().__init__(pos, model)
         self.x, self.y = pos
+        # +int x position
+        # +int y
         self.state = init_state
+        # +int state 1=running        
         self.forest_age = init_age
+        # +int forest_age
         self._nextState = None
+        # +int _nextState The state this will be at the end of a step
         self.isConsidered = False
+        # +bool isConsidered Determines if this is considered for processing.        
         self.color = init_color
+        # +str color The background color of the cell        
         self.type = "forest"
+        # +str type The type of this agent (forest)        
 
     def setColor(self):
 
@@ -77,24 +83,10 @@ class LandCell(Agent):
         changed here, but is just computed and stored in self._nextState,
         because our current state may still be necessary for our neighbors
         to calculate their next state.
-        When a cell is made alive, its neighbors are able to be considered in the next step. Only cells that are considered check their neighbors for performance reasons.
+        Only cells that are considered check their neighbors for performance reasons.
         """
         # assume no state change
         self._nextState = self.state
-        #self.isConsidered = True
-        #print(self.isForestMature())
-        #if (not self.isForestMature()) and self.isConsidered:
-        #    print("Not mature")
-            # Get the neighbors and apply the rules 
-            # at the next tick.
-        #    for neighbor in self.neighbors:
-        #        #if(model.cellsConsumed <= model.MAXCELLS):
-        #        if neighbor.isForestMature() == True:
-        #            neighbor._nextState = self.FORESTCUT
-        #            neighbor.forest_age = 0
-        #            neighbor.isConsidered = True
-                    # model.cellsConsumed = model.cellsConsumed + 1
-                    
                     
         if self.state == self.FORESTCUT:
             self._nextState = self.FORESTYOUNG
@@ -108,8 +100,7 @@ class LandCell(Agent):
                 if self.state == self.FORESTMATURE:
                     self.forest_age = self.forest_age + 1
         self.setColor()
-        #print(self.forest_age)
-       
+        #print(self.forest_age)      
   
 
     def advance(self):

@@ -1,0 +1,48 @@
+
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+        <div class="mermaid">
+classDiagram
+    class Mill
+Mill : +__init__(self, pos, model, init_state=RUNNING, max_cut=MAXCUT, mill_radius=3)
+Mill :  +int x position
+Mill :  +int y
+Mill :  +int state 1=running
+Mill :  +int _nextState The state this will be at the end of a step
+Mill :  +bool isConsidered
+Mill : +neighbors(self)
+Mill : +neighbors_outer(self, radius)
+Mill : +state_text(self)
+Mill : +considered(self)
+Mill : +step(self)
+Mill : +advance(self)
+        </div>
+        <div class="mermaid">
+classDiagram
+    class LandCell
+LandCell : +__init__(self, pos, model, init_state=FORESTMATURE, init_age=100, init_color="grey")
+LandCell :  +int x position
+LandCell :  +int y
+LandCell :  +int state 1=running
+LandCell :  +int forest_age
+LandCell :  +int _nextState The state this will be at the end of a step
+LandCell :  +bool isConsidered Determines if this is considered for processing.
+LandCell : +setColor(self)
+LandCell : +isForest(self)
+LandCell : +isForestMature(self)
+LandCell : +neighbors(self)
+LandCell : +considered(self)
+LandCell : +step(self)
+LandCell : +advance(self)
+        </div>
+        <div class="mermaid">
+classDiagram
+    class CharcoalMap
+CharcoalMap : +__init__(self, height=50, width=50, max_cut=2, mill_radius=3, forest_age_maturity=30)
+CharcoalMap : +object grid HexGrid a grid to represent the map.
+CharcoalMap : +step(self)
+        </div>
+  </body>
+</html>
