@@ -8,4 +8,10 @@ I'm using Mermaid's class structure
 https://mermaid-js.github.io/mermaid/#/classDiagram
 and then exporting comments into it.
 
-My hope is comment once, document everywhere
+My hope is comment once, document everywhere.
+
+documenter.py is working well, exporting comments into markdownish syntax for Mermaid to use.
+
+## Clean up
+
+I've cleaned up some class and variable names for the prototype model.

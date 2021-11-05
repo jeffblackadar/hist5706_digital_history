@@ -2,8 +2,8 @@ from mesa import Model
 from mesa.time import SimultaneousActivation
 from mesa.space import HexGrid
 from mesa.datacollection import DataCollector
-from landcell import LandCell
-from mill import Mill
+from mill.landcell import LandCell
+from mill.mill import Mill
 
 def compute_total_cut(model):
     return model.total_cut
