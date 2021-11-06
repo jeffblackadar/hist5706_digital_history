@@ -3,9 +3,9 @@
 # Formats comments into class diagrams in markdown/html using Mermaid
 # https://mermaid-js.github.io/mermaid/#/classDiagram
 
-from model import MillMap
-from mill import Mill
-from landcell import LandCell
+from mill.model import MillMap
+from mill.mill import Mill
+from mill.landcell import LandCell
 
 
 
@@ -48,7 +48,7 @@ write_f.write((LandCell.__doc__).replace('#',"</p>"))
 process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\mill\\landcell.py', write_f)
 
 
-
+write_f.write('<hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.')
 write_f.write('  </body>\n')
 write_f.write('</html>\n')
 write_f.close

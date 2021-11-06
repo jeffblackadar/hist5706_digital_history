@@ -31,7 +31,7 @@ MillMap : +step(self)
 
     The saw mill is at the center of the map.
     When the mill's loggers cut down the forest in a neighbouring cell, that cell's forest's age becomes 0 and is not mature. 
-    For the mill to stay running, it needs to harvest a set number of forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and it state changes to 0 (stopped/closed)    
+    For the mill to stay running, it needs to harvest a set number of mature forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and its state changes to 0 (stopped/closed).    
     
     Attributes:
         See comments below in __init__
@@ -59,7 +59,7 @@ Mill : +advance(self)
     Represents a single area of forest in the simulation.
 
     The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
-    The land cell where the mill is is not a forest.
+    The land cell where the mill is located is not a forest.
     The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age.    
     
     Attributes:
@@ -82,5 +82,5 @@ LandCell : +considered(self)
 LandCell : +step(self)
 LandCell : +advance(self)
         </div>
-  </body>
+<hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.  </body>
 </html>
