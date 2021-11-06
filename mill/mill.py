@@ -79,8 +79,10 @@ class Mill(Agent): # The mill cuts the wood of neighbouring forest cells if they
             for neighbor in self.neighbors_outer(self.mill_radius):
                 
                 if neighbor.isForestMature() == True:
-                    neighbor._nextState = neighbor.FORESTCUT
+                    neighbor._nextState = neighbor.FORESTYOUNG
+                    neighbor.state = neighbor.FORESTCUT
                     neighbor.forest_age = 0
+                    neighbor.setColor()
                     neighbor.isConsidered = True
                     self.cells_cut = self.cells_cut + 1
                     if self.cells_cut >= self.max_cut:
