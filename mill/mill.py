@@ -5,7 +5,7 @@ class Mill(Agent): # The mill cuts the wood of neighbouring forest cells if they
     """
     The saw mill is at the center of the map.
     When the mill's loggers cut down the forest in a neighbouring cell, that cell's forest's age becomes 0 and is not mature. 
-    For the mill to stay running, it needs to harvest a set number of forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and it state changes to 0 (stopped/closed)    
+    For the mill to stay running, it needs to harvest a set number of mature forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and its state changes to 0 (stopped/closed).    
     
     Attributes:
         See comments below in __init__

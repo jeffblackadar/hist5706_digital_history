@@ -6,7 +6,7 @@ class LandCell(Agent):
     Represents a single area of forest in the simulation.
 
     The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
-    The land cell where the mill is is not a forest.
+    The land cell where the mill is located is not a forest.
     The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age.    
     
     Attributes:
