@@ -3,9 +3,12 @@
 # Formats comments into class diagrams in markdown/html using Mermaid
 # https://mermaid-js.github.io/mermaid/#/classDiagram
 
-from mill.model import MillMap
-from mill.mill import Mill
-from mill.landcell import LandCell
+from charcoal_production.model import CharoalProductionMap
+from charcoal_production.furnace import Furnace
+from charcoal_production.landcell import LandCell
+
+
+
 
 def process_class(py_file, write_f):
     write_f.write('        <div class="mermaid">\n')
@@ -27,22 +30,22 @@ def process_class(py_file, write_f):
     read_f.close
     write_f.write('        </div>\n')
 
-write_f = open("C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\docs\\doc_mill.html", "w")
+write_f = open("C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\docs\\doc_charcoal_production.html", "w")
 write_f.write('\n')
 write_f.write('<html>\n')
 write_f.write('  <body>\n')
 write_f.write('    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>\n')
 write_f.write('    <script>mermaid.initialize({startOnLoad:true});</script>\n')
-write_f.write('<h1>Mill Model</h1>\n')
-write_f.write('<h2>Model: MillMap class</h2>\n')
-write_f.write((MillMap.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\mill\\model.py', write_f)
-write_f.write('<h2>Agent: Mill class</h2>\n')
-write_f.write((Mill.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\mill\\mill.py', write_f)
+write_f.write('<h1>Charcoal Production Model</h1>\n')
+write_f.write('<h2>Model: CharcoalProductionMap class</h2>\n')
+write_f.write((CharcoalProductionMap.__doc__).replace('#',"</p>"))
+process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoal_production\\model.py', write_f)
+write_f.write('<h2>Agent: Furnace class</h2>\n')
+write_f.write((Furnace.__doc__).replace('#',"</p>"))
+process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoal_production\\furnace.py', write_f)
 write_f.write('<h2>Agent: landCell class</h2>\n')
 write_f.write((LandCell.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\mill\\landcell.py', write_f)
+process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoal_production\\landcell.py', write_f)
 
 
 write_f.write('<hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.')

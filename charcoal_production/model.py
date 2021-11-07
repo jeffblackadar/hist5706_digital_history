@@ -2,38 +2,38 @@ from mesa import Model
 from mesa.time import SimultaneousActivation
 from mesa.space import HexGrid
 from mesa.datacollection import DataCollector
-from mill.landcell import LandCell
-from mill.mill import Mill
+from charcoal_production.landcell import LandCell
+from charcoal_production.furnace import Furnace
+from charcoal_production.charcoal_hearth import CharcoalHearth
 
 def compute_total_cut(model):
     return model.total_cut
 
-def compute_mill_forest_average_age(model):
-    mill_forest = [a for a in model.mill.neighbors_outer(model.mill.mill_radius) if a.type == "forest"]
+def compute_furnace_forest_average_age(model):
+    furnace_forest = [a for a in model.furnace.neighbors_outer(model.furnace.collection_radius) if a.type == "forest"]
 
-    avg_mfa = sum([a.forest_age for a in mill_forest]) / len(mill_forest)
+    avg_mfa = sum([a.forest_age for a in furnace_forest]) / len(furnace_forest)
     return avg_mfa
 
-class MillMap(Model):
+class CharcoalProductionMap(Model):
     """
     # Map:
     Represents the hex grid of cells. The grid is represented by a 2-dimensional array of cells with adjacency rules specific to hexagons.
 
-    # Mill:
-    The saw mill is at the center of the map.
-    When the mill's loggers cut down the forest in a neighbouring cell, that cell's forest's age becomes 0. 
-    For the mill to stay running, it needs to harvest a set number of mature forest cells each year. If the mill fails to harvest enough forest cells, the mill closes and it state changes to 0 (stopped/closed)
+    # Furnace:
+    The furnace is at the center of the map.
+    When colliers cut down the forest to make charcoal in a neighbouring cell, that cell's forest's age becomes 0 and is not mature.
 
     # land Cell:
     Each hexagon represents a single area of forest in the simulation.
     
     The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
-    The land cell where the mill is located is not a forest.
+    The land cell where the furnace is located is not a forest.
     The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age. 
     """
     
 
-    def __init__(self, height=50, width=50, max_cut=2, mill_radius=3, forest_age_maturity=30):
+    def __init__(self, height=50, width=50, max_cut=2, collection_radius=3, forest_age_maturity=30):
         """
         Create a new playing area of (height, width) cells.
         """
@@ -70,14 +70,14 @@ class MillMap(Model):
         #    a.isConsidered = True
 
         print("max_cut",max_cut)
-        self.mill = Mill((width // 2,height // 2),self,1,max_cut, mill_radius)
-        self.grid.place_agent(self.mill, (width // 2, height // 2))
-        self.schedule.add(self.mill)
+        self.furnace = Furnace((width // 2,height // 2),self,1,max_cut, collection_radius)
+        self.grid.place_agent(self.furnace, (width // 2, height // 2))
+        self.schedule.add(self.furnace)
 
         self.datacollector = DataCollector(
             model_reporters={
                 "Cut": compute_total_cut,
-                "Age": compute_mill_forest_average_age
+                "Age": compute_furnace_forest_average_age
             },
         )
 
@@ -90,5 +90,5 @@ class MillMap(Model):
         """
         self.schedule.step()
         #self.cellsConsumed = 0
-        self.total_cut = self.total_cut + self.mill.cells_cut
+        self.total_cut = self.total_cut + self.furnace.cells_cut
         self.datacollector.collect(self)
