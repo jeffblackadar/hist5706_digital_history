@@ -6,43 +6,37 @@ def portrayAgent(agent):
     :return: the portrayal dictionary.
     """
     assert agent is not None
-    if agent.type == "forest":
-        return {
-            "Shape": "hex",
-            "r": 1,
-            "Filled": "true",
-            "Layer": 0,
-            "x": agent.x,
-            "y": agent.y,
-            "Color": agent.color,
-            # "text": agent.forest_age,
-            "text_color":"Black"
-        
-        }
-    else:
-        if agent.type == "furnace":
-            return {
-                "Shape": "hex",
-                "r": 1,
-                "Filled": "true",
-                "Layer": 0,
-                "x": agent.x,
-                "y": agent.y,
-                "Color": agent.color,
-                "text": agent.state_text,
-                "text_color":"White"
-        }
-        else:
-            if agent.type == "charcoal_hearth":
-                return {
-                    "Shape": "circle",
-                    "r": 1,
-                    "Filled": "true",
-                    "Layer": 1,
-                    "x": agent.x,
-                    "y": agent.y,
-                    "Color": agent.color
-                }
+
+    if agent is None:
+        return
+
+    if agent.type=="forest":
+        portrayal = {"Shape": "hex", "r": 1, "Filled": "true", "Layer": 0}
+        (x, y) = agent.pos
+        portrayal["x"] = x
+        portrayal["y"] = y
+        portrayal["Color"] = agent.color   
+
+    if agent.type=="furnace":
+        portrayal = {"Shape": "hex", "r": 1, "Filled": "true", "Layer": 0}
+        (x, y) = agent.pos
+        portrayal["x"] = x
+        portrayal["y"] = y
+        portrayal["Color"] = agent.color 
+        portrayal["Color"] = agent.color
+        portrayal["text"] = agent.state_text
+        portrayal["text_color"] = "White"
+
+    if agent.type=="charcoal_hearth":
+        portrayal = {"Shape": "circle", "r": 0.5, "Filled": "false", "Layer": 1}
+        (x, y) = agent.pos
+        portrayal["x"] = x
+        portrayal["y"] = y
+        portrayal["Color"] = agent.color     
+
+    return portrayal
+
+
 
 
     

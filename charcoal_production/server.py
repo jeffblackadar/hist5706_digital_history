@@ -25,11 +25,11 @@ chart = ChartModule([{"Label": "Cut",
 model_params = {
     "height": height,
     "width": width,
-    "max_cut": UserSettableParameter("slider", "Cells cut per year for furnace", 5, 1, 20),
+    "max_cut": UserSettableParameter("slider", "Cells cut per year for furnace", 4, 1, 20),
     "collection_radius": UserSettableParameter("slider", "Radius from furnace of cut area", 6 , 1, 8),
-    "forest_age_maturity": UserSettableParameter("slider", "Age the forest becomes mature", 40, 20, 100),
+    "forest_age_maturity": UserSettableParameter("slider", "Age the forest becomes mature", 20, 20, 100),
 }
-
+#default, min_value, max_value
 server = ModularServer(
    CharcoalProductionMap, [canvas_element, chart], "Charcoal Production Map", model_params
 )

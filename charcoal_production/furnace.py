@@ -71,20 +71,27 @@ class Furnace(Agent): # The furnace consumes charcoal.
             # change for performance reasons
             # should loop though max_cut times
             for neighbor in self.neighbors_outer(self.collection_radius):
-                
-                if neighbor.isForestMature() == True:
-                    neighbor._nextState = neighbor.FORESTYOUNG
-                    neighbor.state = neighbor.FORESTCUT
-                    neighbor.forest_age = 0
-                    neighbor.setColor()
-                    neighbor.isConsidered = True
-                    self.cells_cut = self.cells_cut + 1
-                    charcoal_hearth = CharcoalHearth(neighbor.pos, self)
-                    self.model.grid.place_agent(charcoal_hearth, neighbor.pos)
-                    self.model.schedule.add(charcoal_hearth)
+                if neighbor.type == "forest":
+                    if neighbor.isForestMature() == True:
+                        neighbor._nextState = neighbor.FORESTYOUNG
+                        neighbor.state = neighbor.FORESTCUT
+                        neighbor.forest_age = 0
+                        neighbor.setColor()
+                        neighbor.isConsidered = True
+                        self.cells_cut = self.cells_cut + 1
 
-                    if self.cells_cut >= self.max_cut:
-                        break
+                        if neighbor.has_charcoal_hearth == 1:
+                            # Fire up existing hearth
+                            neighbor.charcoal_hearth.state = neighbor.charcoal_hearth.BUILT
+                            neighbor.charcoal_hearth.setColor()                            
+                        else:
+                            charcoal_hearth = CharcoalHearth(neighbor.pos, self)
+                            self.model.grid.place_agent(charcoal_hearth, neighbor.pos)
+                            self.model.schedule.add(charcoal_hearth)
+                            neighbor.has_charcoal_hearth = 1
+                            neighbor.charcoal_hearth = charcoal_hearth
+                        if self.cells_cut >= self.max_cut:
+                            break
         # Did furnace harvest enough?            
         if self.cells_cut < self.max_cut:
             self._nextState = 0

@@ -1,6 +1,9 @@
 from mesa import Model
 from mesa.time import SimultaneousActivation
-from mesa.space import HexGrid
+# changing to HexGridMulti
+# from mesa.space import HexGrid
+from charcoal_production.HexGridMulti import HexGridMulti
+
 from mesa.datacollection import DataCollector
 from charcoal_production.landcell import LandCell
 from charcoal_production.furnace import Furnace
@@ -47,7 +50,7 @@ class CharcoalProductionMap(Model):
         self.schedule = SimultaneousActivation(self)
 
         # Use a hexagonal grid, where edges don't wrap around (it's a map of a part of the earth's surface).
-        self.grid = HexGrid(height, width, torus=False)
+        self.grid = HexGridMulti(height, width, torus=False)
         #+object grid HexGrid a grid to represent the map.
 
         #self.cellsConsumed = 0

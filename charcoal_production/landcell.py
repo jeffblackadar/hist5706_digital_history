@@ -36,9 +36,13 @@ class LandCell(Agent):
         self.isConsidered = False
         # +bool isConsidered Determines if this is considered for processing.        
         self.color = init_color
-        # +str color The background color of the cell        
+        # +str color The background color of the cell. Changes with setColor()       
         self.type = "forest"
-        # +str type The type of this agent (forest)        
+        # +str type The type of this agent (forest)
+        self.charcoal_hearth = 0
+        # +object charcoal_hearth This landcell's charcoal hearth, if present
+        self.has_charcoal_hearth = 0
+        # +bool has_charcoal_hearth This landcell has a charcoal hearth
 
     def setColor(self):
 
@@ -100,6 +104,8 @@ class LandCell(Agent):
                 if self.state == self.FORESTMATURE:
                     self.forest_age = self.forest_age + 1
         self.setColor()
+        if self.has_charcoal_hearth == 1:
+            self.charcoal_hearth.setColor() 
         #print(self.forest_age)      
   
 
