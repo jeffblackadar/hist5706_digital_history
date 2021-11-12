@@ -3,6 +3,17 @@ from mesa import Agent
 
 
 class CharcoalHearth(Agent):
+    """ 
+    Represents a single charcoal hearth that is situated in an area of forest (LandCell) in the simulation.
+
+    The charcoal hearth may be in any type of forest and has three states: 
+    built (the meiler is constructed from wood cut in neighboring cells), 
+    Fired (a transitory state to produce charcoal), 
+    Relict (A charcoal hearth that was fired previously.)   
+    
+    Attributes:
+        See comments below in __init__
+    """    
     BUILT = 2
     FIRED = 1
     RELICT = 0

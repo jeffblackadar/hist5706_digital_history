@@ -2,12 +2,12 @@ from mesa import Model
 from mesa.time import SimultaneousActivation
 # changing to HexGridMulti
 # from mesa.space import HexGrid
-from charcoal_production.HexGridMulti import HexGridMulti
+from charcoalproduction.HexGridMulti import HexGridMulti
 
 from mesa.datacollection import DataCollector
-from charcoal_production.landcell import LandCell
-from charcoal_production.furnace import Furnace
-from charcoal_production.charcoal_hearth import CharcoalHearth
+from charcoalproduction.landcell import LandCell
+from charcoalproduction.furnace import Furnace
+from charcoalproduction.charcoalhearth import CharcoalHearth
 
 def compute_total_cut(model):
     return model.total_cut

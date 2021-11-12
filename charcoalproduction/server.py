@@ -4,8 +4,8 @@ from mesa.visualization.modules import ChartModule
 
 from mesa.visualization.UserParam import UserSettableParameter
 
-from charcoal_production.portrayal import portrayAgent
-from charcoal_production.model import CharcoalProductionMap
+from charcoalproduction.portrayal import portrayAgent
+from charcoalproduction.model import CharcoalProductionMap
 
 #from .portrayal import portrayCell
 #from .model import CharcoalProductionMap

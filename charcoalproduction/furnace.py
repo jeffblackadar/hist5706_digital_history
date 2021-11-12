@@ -1,5 +1,5 @@
 from mesa import Agent
-from charcoal_production.charcoal_hearth import CharcoalHearth
+from charcoalproduction.charcoalhearth import CharcoalHearth
 
 class Furnace(Agent): # The furnace consumes charcoal.
     """
