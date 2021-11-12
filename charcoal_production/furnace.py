@@ -12,9 +12,10 @@ class Furnace(Agent): # The furnace consumes charcoal.
 
     STOPPED = 0
     RUNNING = 1
-    MAXCUT=3
+    REQLOADS=3
+    CELLSFORHEARTH=2
 
-    def __init__(self, pos, model, init_state=RUNNING, max_cut=MAXCUT, collection_radius=3):
+    def __init__(self, pos, model, init_state=RUNNING, required_charcoal_loads_per_year=REQLOADS, cells_cut_for_charcoal_hearth=CELLSFORHEARTH,collection_radius=3):
         """
         Create a furnace, in the given state, at the given x, y position.
         """
@@ -32,12 +33,19 @@ class Furnace(Agent): # The furnace consumes charcoal.
         # +str color The background color of the cell
         self.cells_cut = 0
         # +int cells_cut The number of land_cells the furnace has cut or harvested
-        self.max_cut = max_cut
-        # +int max_cut The maximum number of cells cut in a year
+        self.charcoal_loads_produced_this_year = 0
+        # +int loads of chancoal produced
+        self.required_charcoal_loads_per_year = required_charcoal_loads_per_year
+        # +int required_charcoal_loads The required number of loads to operate the furnace
+        self.cells_cut_for_charcoal_hearth = cells_cut_for_charcoal_hearth
+        # +int cells_cut_for_charcoal_hearth The number of cells of wood required to build a charcoal hearth
+
         self.collection_radius = collection_radius
         # +int collection_radius The maximum distance from the furnace wood is cut and charcoal is harvested
         self.type = "furnace"
         # +str type The type of this agent (furnace)
+        self.charcoal_hearths = []
+        # +list charcoal_hearths The list of charcoal hearths surrounding the furnace
 
 
     @property
@@ -67,33 +75,118 @@ class Furnace(Agent): # The furnace consumes charcoal.
         self._nextState = self.state        
 
         self.cells_cut = 0
+        # number of charcoal hearths the furnace needs in operation
+        #ch_need = 2
+        self.charcoal_loads_produced_this_year = 0
+        
+        # counter of the number of charcoal hearths in operation this step
+        ch_built = 0
+
+        # is furnace running?
         if self.state > 0:
+            # Check if existing charcoal hearths have enough nearby harvestable wood to make a hearth.
+            for ch in self.charcoal_hearths:
+                # Check if hearth is relict. Already Built or Fired hearths can't be re-used
+                if ch.state == ch.RELICT:
+                
+                    # find out if there is enough harvestable wood to make charcoal
+                    # Make a list of possible harvest cells
+                    ch_possible_cut_cells = []
+                
+                
+                    chns = self.model.grid.iter_neighbors((ch.x, ch.y), True,1)
+
+                    for chn in chns:
+                        if chn.type == "forest":
+                            if chn.isForestMature() == True:
+                                ch_possible_cut_cells.append(chn)
+                                if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
+                                    break
+                    if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
+                        # cut the cells
+                        for chn in ch_possible_cut_cells:
+                            chn._nextState = chn.FORESTYOUNG
+                            chn.state = chn.FORESTCUT
+                            chn.forest_age = 0
+                            chn.setColor()
+                            chn.isConsidered = True
+                            self.cells_cut = self.cells_cut + 1
+                        # build the hearth
+                        ch.state = ch.BUILT
+                        ch.setColor()
+                        self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
+                        ch_built = ch_built + 1
+                if self.charcoal_loads_produced_this_year >= self.required_charcoal_loads_per_year:
+                    break
+
+            # do we need to harvest more from a place with no charcoal hearths?
+            if self.charcoal_loads_produced_this_year < self.required_charcoal_loads_per_year:
+
             # change for performance reasons
             # should loop though max_cut times
-            for neighbor in self.neighbors_outer(self.collection_radius):
-                if neighbor.type == "forest":
-                    if neighbor.isForestMature() == True:
-                        neighbor._nextState = neighbor.FORESTYOUNG
-                        neighbor.state = neighbor.FORESTCUT
-                        neighbor.forest_age = 0
-                        neighbor.setColor()
-                        neighbor.isConsidered = True
-                        self.cells_cut = self.cells_cut + 1
+            
+                for neighbor in self.neighbors_outer(self.collection_radius):
+                    if neighbor.type == "forest":
+                        if neighbor.isForestMature() == True:
+                            ch_possible_cut_cells = []
+                            chns = self.model.grid.iter_neighbors((neighbor.x, neighbor.y), True,1)
+                            for chn in chns:
+                                if chn.type == "forest":
+                                    if chn.isForestMature() == True:
+                                        ch_possible_cut_cells.append(chn)
+                                        if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
+                                            print("cut for hearth",len(ch_possible_cut_cells),self.cells_cut_for_charcoal_hearth)
+                                            break
+                    # Indented twice
+                            if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
+                                charcoal_hearth_present_in_cut_area = False
+                                for chn in ch_possible_cut_cells:
+                                    chn._nextState = chn.FORESTYOUNG
+                                    chn.state = chn.FORESTCUT
+                                    chn.forest_age = 0
+                                    chn.setColor()
+                                    chn.isConsidered = True
+                                    self.cells_cut = self.cells_cut + 1
+                                # see if there is a hearth, if not set one
+                                new_cell_for_charcoal_hearth = 0
+                                new_cell_for_charcoal_hearth_neighbor_available = False               
+                                for chn in ch_possible_cut_cells:                            
+                                    if chn.has_charcoal_hearth == 1:
+                                        # only a relict hearth can be rebuilt.  Built or fired hearths can't
+                                        if chn.charcoal_hearth.state == chn.charcoal_hearth.RELICT:
+                                           # Fire up existing hearth
+                                           chn.charcoal_hearth.state = chn.charcoal_hearth.BUILT
+                                           chn.charcoal_hearth.setColor()
+                                           charcoal_hearth_present_in_cut_area = True
+                                           self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
+                                    else:
+                                        # try to use the neighbour of the mill as the place to built a hearth, but only if it has no hearth aleady
+                                        if neighbor.has_charcoal_hearth == 0:
+                                            if neighbor.x == chn.x and neighbor.y == chn.y:
+                                                new_cell_for_charcoal_hearth_neighbor_available = True
 
-                        if neighbor.has_charcoal_hearth == 1:
-                            # Fire up existing hearth
-                            neighbor.charcoal_hearth.state = neighbor.charcoal_hearth.BUILT
-                            neighbor.charcoal_hearth.setColor()                            
-                        else:
-                            charcoal_hearth = CharcoalHearth(neighbor.pos, self)
-                            self.model.grid.place_agent(charcoal_hearth, neighbor.pos)
-                            self.model.schedule.add(charcoal_hearth)
-                            neighbor.has_charcoal_hearth = 1
-                            neighbor.charcoal_hearth = charcoal_hearth
-                        if self.cells_cut >= self.max_cut:
-                            break
-        # Did furnace harvest enough?            
-        if self.cells_cut < self.max_cut:
+                                                 
+                                        new_cell_for_charcoal_hearth = chn
+
+                                # The neighbor cell is the best choice, if it was found, use it.          
+                                if new_cell_for_charcoal_hearth_neighbor_available == True:
+                                    new_cell_for_charcoal_hearth = neighbor
+
+                                if charcoal_hearth_present_in_cut_area == False:
+
+                                    charcoal_hearth = CharcoalHearth(new_cell_for_charcoal_hearth.pos, self)
+                                    charcoal_hearth.state = charcoal_hearth.BUILT
+                                    self.model.grid.place_agent(charcoal_hearth, new_cell_for_charcoal_hearth.pos)
+                                    self.model.schedule.add(charcoal_hearth)
+                                    new_cell_for_charcoal_hearth.has_charcoal_hearth = 1
+                                    new_cell_for_charcoal_hearth.charcoal_hearth = charcoal_hearth
+                                    self.charcoal_hearths.append(charcoal_hearth)
+                                    self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
+                        # end indented
+                    if self.charcoal_loads_produced_this_year >= self.required_charcoal_loads_per_year:
+                        break
+        # At the end of this year, did furnace harvest enough?            
+        if self.charcoal_loads_produced_this_year < self.required_charcoal_loads_per_year:
             self._nextState = 0
             print("Furnace is out of business!")
             self.color = "grey"

@@ -36,7 +36,7 @@ class CharcoalProductionMap(Model):
     """
     
 
-    def __init__(self, height=50, width=50, max_cut=2, collection_radius=3, forest_age_maturity=30):
+    def __init__(self, height=50, width=50, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30):
         """
         Create a new playing area of (height, width) cells.
         """
@@ -72,8 +72,10 @@ class CharcoalProductionMap(Model):
         #for a in centerishCell.neighbors:
         #    a.isConsidered = True
 
-        print("max_cut",max_cut)
-        self.furnace = Furnace((width // 2,height // 2),self,1,max_cut, collection_radius)
+        print("required_charcoal_loads_per_year: ",required_charcoal_loads_per_year)
+        #self, pos, model, init_state=RUNNING, required_charcoal_loads_per_year=REQLOADS, cells_cut_for_charcoal_hearth=CELLSFORHEARTH,collection_radius=3):
+        self.furnace = Furnace((width // 2,height // 2),self,1,required_charcoal_loads_per_year, cells_cut_for_charcoal_hearth, collection_radius)
+
         self.grid.place_agent(self.furnace, (width // 2, height // 2))
         self.schedule.add(self.furnace)
 

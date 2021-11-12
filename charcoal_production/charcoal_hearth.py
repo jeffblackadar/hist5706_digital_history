@@ -20,7 +20,7 @@ class CharcoalHearth(Agent):
         print(self.unique_id)
         self.state = self.BUILT
         # +int state FIRED = 1, RELICT = 0, BUILT = 2
-        self.color = "black"
+        self.color = "orange"
         # +str color The color of circular hearth symbol. Changes with setColor()
         self.setColor()      
 
@@ -33,7 +33,7 @@ class CharcoalHearth(Agent):
                 self.color = "black"
             else:
                 if self.state == self.BUILT:
-                    self.color = "darkbrown"
+                    self.color = "orange"
                 else:
                     self.color = "pink"
 

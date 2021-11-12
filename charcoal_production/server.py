@@ -25,7 +25,8 @@ chart = ChartModule([{"Label": "Cut",
 model_params = {
     "height": height,
     "width": width,
-    "max_cut": UserSettableParameter("slider", "Cells cut per year for furnace", 4, 1, 20),
+    "required_charcoal_loads_per_year": UserSettableParameter("slider", "Required number of loads of charcoal to run furnace each year", 4, 1, 20),
+    "cells_cut_for_charcoal_hearth": UserSettableParameter("slider", "Cells cut to make a charcoal hearth", 2, 1, 5),
     "collection_radius": UserSettableParameter("slider", "Radius from furnace of cut area", 6 , 1, 8),
     "forest_age_maturity": UserSettableParameter("slider", "Age the forest becomes mature", 20, 20, 100),
 }
