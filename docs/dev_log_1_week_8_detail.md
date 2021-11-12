@@ -13,6 +13,7 @@ I've changed the Mill class to Furnace class.  MillMap is now CharcoalProduction
 
 <details>
   <summary>It is necessary to modify HexGrid to inherit from MultiGrid to have 2 agents in the same place</summary>
+  
 ![Agents eating other agents](agents_cannibalism.png)
 (Above: Agents eating other agents)
 
