@@ -1,0 +1,96 @@
+{
+  "main": {
+    "id": "637dc8d6ed047519",
+    "type": "split",
+    "children": [
+      {
+        "id": "1fae36a0e8f28c2f",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "template 1.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8e40d96fd6ea13f8",
+    "type": "split",
+    "children": [
+      {
+        "id": "9ee9d6c1ba971eca",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa661adf2e3d5f1f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "73952d135b8517c3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e2eda91405e5c8ad",
+    "type": "split",
+    "children": [
+      {
+        "id": "b6b4c37f3a7976d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6855c6c7d83e2875",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "template 1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "1fae36a0e8f28c2f",
+  "lastOpenFiles": [
+    "template 1.md",
+    "template.md",
+    "19th-Century Charcoal Production in Vermont.md",
+    "Untitled.md"
+  ]
+}
