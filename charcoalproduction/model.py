@@ -36,7 +36,7 @@ class CharcoalProductionMap(Model):
     """
     
 
-    def __init__(self, height=50, width=50, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30):
+    def __init__(self, height=100, width=120, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30):
         """
         Create a new playing area of (height, width) cells.
         """

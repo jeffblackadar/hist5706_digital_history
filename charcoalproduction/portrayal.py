@@ -12,6 +12,8 @@ def portrayAgent(agent):
 
     if agent.type=="forest":
         portrayal = {"Shape": "hex", "r": 1, "Filled": "true", "Layer": 0}
+        # for set up as a rectangular grid
+        # portrayal = {"Shape": "rect", "w": 1, "h": 1, "Filled": "true", "Layer": 0}
         (x, y) = agent.pos
         portrayal["x"] = x
         portrayal["y"] = y
@@ -19,6 +21,8 @@ def portrayAgent(agent):
 
     if agent.type=="furnace":
         portrayal = {"Shape": "hex", "r": 1, "Filled": "true", "Layer": 0}
+        # for set up as a rectangular grid
+        # portrayal = {"Shape": "rect", "w": 1, "h": 1, "Filled": "true", "Layer": 0}
         (x, y) = agent.pos
         portrayal["x"] = x
         portrayal["y"] = y

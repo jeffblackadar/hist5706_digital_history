@@ -1,4 +1,7 @@
 from mesa.visualization.modules import CanvasHexGrid
+
+# for set up as a rectangular grid
+# from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule
 
@@ -13,7 +16,10 @@ from charcoalproduction.model import CharcoalProductionMap
 width, height = 19, 19
 
 # Make a map on a 500x500 display.
-canvas_element = CanvasHexGrid(portrayAgent, width, height, 500, 500)
+canvas_element = CanvasHexGrid(portrayAgent, width, height, 600, 600)
+
+# for set up as a rectangular grid
+#canvas_element = CanvasGrid(portrayAgent, width, height, 600, 600)
 
 chart = ChartModule([{"Label": "Cut",
                       "Color": "Black"},
