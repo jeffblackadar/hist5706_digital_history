@@ -124,9 +124,14 @@ class Furnace(Agent): # The furnace consumes charcoal.
 
             # change for performance reasons
             # should loop though max_cut times
+                #for neighbor in self.model.grid.__iter__():
+                #    print(neighbor[1])
             
                 for neighbor in self.neighbors_outer(self.collection_radius):
+                #for neighbor in self.model.grid.__iter__(): 
+                    print(neighbor)   
                     if neighbor.type == "forest":
+                    #if neighbor.isForest() == True:
                         if neighbor.isForestMature() == True:
                             ch_possible_cut_cells = []
                             chns = self.model.grid.iter_neighbors((neighbor.x, neighbor.y), True,1)

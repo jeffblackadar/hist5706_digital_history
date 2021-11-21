@@ -99,6 +99,7 @@ class LandCell(Agent):
             else:                     
                 if self.state == self.FORESTMATURE:
                     self.forest_age = self.forest_age + 1
+                    self.isConsidered = False
         self.setColor()
         #print(self.forest_age)      
   

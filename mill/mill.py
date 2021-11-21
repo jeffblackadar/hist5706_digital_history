@@ -1,4 +1,6 @@
 from mesa import Agent
+from datetime import datetime
+
 
 
 class Mill(Agent): # The mill cuts the wood of neighbouring forest cells if they are mature.
@@ -76,7 +78,11 @@ class Mill(Agent): # The mill cuts the wood of neighbouring forest cells if they
         if self.state > 0:
             # change for performance reasons
             # should loop though max_cut times
-            for neighbor in self.neighbors_outer(self.mill_radius):
+
+            print("start Current Time =", datetime.now())
+            
+            for neighbor in self.neighbors_outer(self.mill_radius):            
+            #for neighbor in self.model.grid.__iter__():   
                 
                 if neighbor.isForestMature() == True:
                     neighbor._nextState = neighbor.FORESTYOUNG
@@ -87,6 +93,7 @@ class Mill(Agent): # The mill cuts the wood of neighbouring forest cells if they
                     self.cells_cut = self.cells_cut + 1
                     if self.cells_cut >= self.max_cut:
                         break
+            print("end Current Time =", datetime.now())
         # Did mill harvest enough?            
         if self.cells_cut < self.max_cut:
             self._nextState = 0
