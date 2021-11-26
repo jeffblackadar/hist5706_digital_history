@@ -16,10 +16,10 @@ from model import CharcoalProductionMap
 #from .portrayal import portrayCell
 #from .model import CharcoalProductionMap
 
-width, height = 50, 50
+width, height = 3, 3
 
 # Make a map on a 500x500 display.
-canvas_element = CanvasHexGrid(portrayAgent, width, height, 500, 500)
+canvas_element = CanvasHexGrid(portrayAgent, width, height, 90, 90)
 
 # for set up as a rectangular grid
 #canvas_element = CanvasGrid(portrayAgent, width, height, 600, 600)
@@ -44,4 +44,4 @@ server = ModularServer(
    CharcoalProductionMap, [canvas_element, chart], "Charcoal Production Map", model_params
 )
 
-
+server.launch()

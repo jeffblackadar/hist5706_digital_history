@@ -57,3 +57,5 @@ Below, model_init_image.py showing agents being added from the center outwards:
 ![model_init_image.py](dl3_4.png)
 
 But, for cell_list in self.model.grid.__iter__(): ignores the order cells are added.  I could have read up about this behaviour before programming this and thinking about it. I will stick with agents starting from the bottom left. While it does not fit my preference of starting from the center, it will reflect a pattern of land usage and construction of charcoal hearths over time, since all areas of forest were consumed for charcoal over cycles of twenty years.
+
+Now, I am concentrating on documentation using [Mermaid](https://mermaid-js.github.io/mermaid/#/) a Markdownish diagram tool. Documentation is taking shape [here](doc_charcoalproduction.html). This week I've added a legend for symbols that appear in the simulation.

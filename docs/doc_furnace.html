@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+<h3>Furnace</h3>
+The furnace is at the center of the map. It is unforested. Charcoal hearths can't be built on the furnace cell. In some simulations the furnace closes if it does not receive a sufficient amount of charcoal that year.
+<div class="mermaid">
+graph TD
+    classDef S_LANDCELL_FURNACER fill:#000,color:#000
+    classDef S_LANDCELL_FURNACEC fill:#999,color:#999
+    FURNACETEXT1["Furnace, Running."]-->FURNACER{{"O"}}
+    FURNACETEXT2["Furnace, Closed."]-->FURNACEC{{"O"}}
+    class FURNACER S_LANDCELL_FURNACER;
+    class FURNACEC S_LANDCELL_FURNACEC;
+
+</div>

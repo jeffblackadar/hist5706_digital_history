@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+<h3>Forest types</h3>
+<div class="mermaid">
+graph TD
+    classDef S_LANDCELL_FMATURE fill:#060,color:#060
+    classDef S_LANDCELL_FCUT fill:#660,color:#660
+    classDef S_LANDCELL_FYOUNG fill:#0e0,color:#0e0
+    FMATURE["Forest, Mature<br>Age of forest is<br>above maturity."]-->LCFM1{{"O"}}
+    FCUT["Forest, Cut<br>Forest was just cut."]-->LCFM2{{"O"}}
+    FYOUNG["Forest, Young<br>Age of forest is<br>below maturity."]-->LCFM3{{"O"}}    
+    class LCFM1 S_LANDCELL_FMATURE;
+    class LCFM2 S_LANDCELL_FCUT;    
+    class LCFM3 S_LANDCELL_FYOUNG;
+</div>
+
+
+
+

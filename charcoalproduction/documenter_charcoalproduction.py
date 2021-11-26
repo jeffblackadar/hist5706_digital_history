@@ -8,8 +8,8 @@ from model import CharcoalProductionMap
 from furnace import Furnace
 from landcell import LandCell
 from charcoalhearth import CharcoalHearth
-
-
+import os
+thisdir = os.path.dirname(__file__)
 
 
 def process_class(py_file, write_f):
@@ -32,6 +32,17 @@ def process_class(py_file, write_f):
     read_f.close
     write_f.write('        </div>\n')
 
+def include_html_file(web_file, write_f):
+    with open(web_file) as read_f:
+        line_count = 0
+        for line in read_f:
+            line_count = line_count + 1
+            if line_count > 4:
+                line_strip = line.strip()
+                write_f.write(line_strip +'\n')
+    read_f.close
+    write_f.write('        </div>\n')
+
 write_f = open("C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\docs\\doc_charcoalproduction.html", "w")
 write_f.write('\n')
 write_f.write('<html>\n')
@@ -41,16 +52,22 @@ write_f.write('    <script>mermaid.initialize({startOnLoad:true});</script>\n')
 write_f.write('<h1>Charcoal Production Model</h1>\n')
 write_f.write('<h2>Model: CharcoalProductionMap class</h2>\n')
 write_f.write((CharcoalProductionMap.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoalproduction\\model.py', write_f)
+process_class(os.path.join(thisdir,'model.py'), write_f)
+
 write_f.write('<h2>Agent: Furnace class</h2>\n')
 write_f.write((Furnace.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoalproduction\\furnace.py', write_f)
+process_class(os.path.join(thisdir,'furnace.py'), write_f)
+include_html_file(os.path.join(thisdir, '..','docs','doc_furnace.html'), write_f)
+
 write_f.write('<h2>Agent: LandCell class</h2>\n')
 write_f.write((LandCell.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoalproduction\\landcell.py', write_f)
+process_class(os.path.join(thisdir,'landcell.py'), write_f)
+include_html_file(os.path.join(thisdir, '..','docs','doc_landcell.html'), write_f)
+
 write_f.write('<h2>Agent: CharcoalHearth class</h2>\n')
 write_f.write((CharcoalHearth.__doc__).replace('#',"</p>"))
-process_class('C:\\Users\\jblackad\\mesa\\src\\mesa\\hist5706_digital_history\\charcoalproduction\\charcoalhearth.py', write_f)
+process_class(os.path.join(thisdir,'charcoalhearth.py'), write_f)
+include_html_file(os.path.join(thisdir, '..','docs','doc_charcoalhearth.html'), write_f)
 
 write_f.write('<hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.')
 write_f.write('  </body>\n')

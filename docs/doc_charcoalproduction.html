@@ -22,7 +22,8 @@
             <div class="mermaid">
 classDiagram
     class CharcoalProductionMap
-CharcoalProductionMap : +__init__(self, height=50, width=50, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30)
+CharcoalProductionMap : +add_cell(self, x,y)
+CharcoalProductionMap : +__init__(self, height=50, width=50, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30, hexgrid = True)
 CharcoalProductionMap : +object grid HexGrid a grid to represent the map.
 CharcoalProductionMap : +step(self)
         </div>
@@ -47,12 +48,27 @@ Furnace :  +int loads of chancoal produced
 Furnace :  +int required_charcoal_loads The required number of loads to operate the furnace
 Furnace :  +int cells_cut_for_charcoal_hearth The number of cells of wood required to build a charcoal hearth
 Furnace :  +int collection_radius The maximum distance from the furnace wood is cut and charcoal is harvested
+Furnace : +getColorNumber(self)
 Furnace : +neighbors(self)
 Furnace : +neighbors_outer(self, radius)
 Furnace : +state_text(self)
 Furnace : +considered(self)
 Furnace : +step(self)
 Furnace : +advance(self)
+        </div>
+
+<h3>Furnace</h3>
+The furnace is at the center of the map. It is unforested. Charcoal hearths can't be built on the furnace cell. In some simulations the furnace closes if it does not receive a sufficient amount of charcoal that year.
+<div class="mermaid">
+graph TD
+classDef S_LANDCELL_FURNACER fill:#000,color:#000
+classDef S_LANDCELL_FURNACEC fill:#999,color:#999
+FURNACETEXT1["Furnace, Running."]-->FURNACER{{"O"}}
+FURNACETEXT2["Furnace, Closed."]-->FURNACEC{{"O"}}
+class FURNACER S_LANDCELL_FURNACER;
+class FURNACEC S_LANDCELL_FURNACEC;
+
+</div>
         </div>
 <h2>Agent: LandCell class</h2>
  
@@ -74,15 +90,36 @@ LandCell :  +int state 1=running
 LandCell :  +int forest_age
 LandCell :  +int _nextState The state this will be at the end of a step
 LandCell :  +bool isConsidered Determines if this is considered for processing.
+LandCell :  +int color decimal number cell
 LandCell :  +object charcoal_hearth This landcell's charcoal hearth, if present
 LandCell :  +bool has_charcoal_hearth This landcell has a charcoal hearth
 LandCell : +setColor(self)
+LandCell : +getColorNumber(self)
 LandCell : +isForest(self)
 LandCell : +isForestMature(self)
 LandCell : +neighbors(self)
 LandCell : +considered(self)
 LandCell : +step(self)
 LandCell : +advance(self)
+        </div>
+
+<h3>Forest types</h3>
+<div class="mermaid">
+graph TD
+classDef S_LANDCELL_FMATURE fill:#060,color:#060
+classDef S_LANDCELL_FCUT fill:#660,color:#660
+classDef S_LANDCELL_FYOUNG fill:#0e0,color:#0e0
+FMATURE["Forest, Mature<br>Age of forest is<br>above maturity."]-->LCFM1{{"O"}}
+FCUT["Forest, Cut<br>Forest was just cut."]-->LCFM2{{"O"}}
+FYOUNG["Forest, Young<br>Age of forest is<br>below maturity."]-->LCFM3{{"O"}}
+class LCFM1 S_LANDCELL_FMATURE;
+class LCFM2 S_LANDCELL_FCUT;
+class LCFM3 S_LANDCELL_FYOUNG;
+</div>
+
+
+
+
         </div>
 <h2>Agent: CharcoalHearth class</h2>
  
@@ -106,6 +143,39 @@ CharcoalHearth : +neighbors_outer(self, radius)
 CharcoalHearth : +considered(self)
 CharcoalHearth : +step(self)
 CharcoalHearth : +advance(self)
+        </div>
+
+
+<h3>Charcoal Hearths</h3>
+<h4>Relict Charcoal Hearth</h4>
+A relict charcoal hearth can be located on any type of forest cell.
+<div class="mermaid">
+graph TD
+classDef S_LANDCELL_FMATURE fill:#060,color:#000
+classDef S_LANDCELL_FCUT fill:#660,color:#000
+classDef S_LANDCELL_FYOUNG fill:#0e0,color:#000
+RCHFMATURE["Relict Charcoal Hearth<br>on Forest, Mature."]-->RCH1{{"O"}}
+RCHFCUT["Relict Charcoal Hearth<br>on Forest, Cut."]-->RCH2{{"O"}}
+RCHFYOUNG["Relict Charcoal Hearth<br>on Forest, Young."]-->RCH3{{"O"}}
+class RCH1 S_LANDCELL_FMATURE;
+class RCH2 S_LANDCELL_FCUT;
+class RCH3 S_LANDCELL_FYOUNG;
+</div>
+
+<h4>Fired Charcoal Hearth</h4>
+A fired charcoal hearth can be located on any type of forest cell.
+<div class="mermaid">
+graph TD
+classDef S_LANDCELL_FMATURE fill:#060,color:#ff0
+classDef S_LANDCELL_FCUT fill:#660,color:#ff0
+classDef S_LANDCELL_FYOUNG fill:#0e0,color:#ff0
+RCHFMATURE["Fired Charcoal Hearth<br>on Forest, Mature."]-->RCH1{{"O"}}
+RCHFCUT["Fired Charcoal Hearth<br>on Forest, Cut."]-->RCH2{{"O"}}
+RCHFYOUNG["Fired Charcoal Hearth<br>on Forest, Young."]-->RCH3{{"O"}}
+class RCH1 S_LANDCELL_FMATURE;
+class RCH2 S_LANDCELL_FCUT;
+class RCH3 S_LANDCELL_FYOUNG;
+</div>
         </div>
 <hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.  </body>
 </html>

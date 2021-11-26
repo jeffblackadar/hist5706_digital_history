@@ -97,7 +97,7 @@ class Furnace(Agent): # The furnace consumes charcoal.
                     ch_possible_cut_cells = []
                 
                 
-                    chns = self.model.grid.iter_neighbors((ch.x, ch.y), True,1)
+                    chns = self.model.grid.iter_neighbors((ch.x, ch.y), True,self.collection_radius)
 
                     for chn in chns:
                         if chn.type == "forest":
@@ -144,7 +144,7 @@ class Furnace(Agent): # The furnace consumes charcoal.
                     #if neighbor.isForest() == True:
                         if neighbor.isForestMature() == True:
                             ch_possible_cut_cells = []
-                            chns = self.model.grid.iter_neighbors((neighbor.x, neighbor.y), True,1)
+                            chns = self.model.grid.iter_neighbors((neighbor.x, neighbor.y), True,self.collection_radius)
                             for chn in chns:
                                 if chn.type == "forest":
                                     if chn.isForestMature() == True:
