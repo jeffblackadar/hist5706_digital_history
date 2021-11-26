@@ -7,16 +7,19 @@ from mesa.visualization.modules import ChartModule
 
 from mesa.visualization.UserParam import UserSettableParameter
 
-from charcoalproduction.portrayal import portrayAgent
-from charcoalproduction.model import CharcoalProductionMap
+#from charcoalproduction.portrayal import portrayAgent
+#from charcoalproduction.model import CharcoalProductionMap
+from portrayal import portrayAgent
+from model import CharcoalProductionMap
+
 
 #from .portrayal import portrayCell
 #from .model import CharcoalProductionMap
 
-width, height = 19, 19
+width, height = 50, 50
 
 # Make a map on a 500x500 display.
-canvas_element = CanvasHexGrid(portrayAgent, width, height, 600, 600)
+canvas_element = CanvasHexGrid(portrayAgent, width, height, 500, 500)
 
 # for set up as a rectangular grid
 #canvas_element = CanvasGrid(portrayAgent, width, height, 600, 600)

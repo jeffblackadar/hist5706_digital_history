@@ -4,10 +4,10 @@
 # https://mermaid-js.github.io/mermaid/#/classDiagram
 
 
-from charcoalproduction.model import CharcoalProductionMap
-from charcoalproduction.furnace import Furnace
-from charcoalproduction.landcell import LandCell
-from charcoalproduction.charcoalhearth import CharcoalHearth
+from model import CharcoalProductionMap
+from furnace import Furnace
+from landcell import LandCell
+from charcoalhearth import CharcoalHearth
 
 
 

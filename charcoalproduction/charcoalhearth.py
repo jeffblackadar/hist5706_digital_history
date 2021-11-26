@@ -28,7 +28,7 @@ class CharcoalHearth(Agent):
         #print(self.x, self.y)
         self.type = "charcoal_hearth"        
         self.unique_id = self.type + ("000"+str(self.x))[-3:]+("000"+str(self.y))[-3:]
-        print(self.unique_id)
+        #print(self.unique_id)
         self.state = self.BUILT
         # +int state FIRED = 1, RELICT = 0, BUILT = 2
         self.color = "orange"

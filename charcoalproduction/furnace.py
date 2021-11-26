@@ -1,5 +1,6 @@
 from mesa import Agent
-from charcoalproduction.charcoalhearth import CharcoalHearth
+#from charcoalproduction.charcoalhearth import CharcoalHearth
+from charcoalhearth import CharcoalHearth
 
 class Furnace(Agent): # The furnace consumes charcoal.
     """
@@ -46,7 +47,9 @@ class Furnace(Agent): # The furnace consumes charcoal.
         # +str type The type of this agent (furnace)
         self.charcoal_hearths = []
         # +list charcoal_hearths The list of charcoal hearths surrounding the furnace
-
+    
+    def getColorNumber(self):
+         return (0,0,0)
 
     @property
     def neighbors(self):
@@ -124,12 +127,19 @@ class Furnace(Agent): # The furnace consumes charcoal.
 
             # change for performance reasons
             # should loop though max_cut times
-                #for neighbor in self.model.grid.__iter__():
-                #    print(neighbor[1])
             
-                for neighbor in self.neighbors_outer(self.collection_radius):
-                #for neighbor in self.model.grid.__iter__(): 
-                    print(neighbor)   
+                #for neighbor in self.neighbors_outer(self.collection_radius):
+                # Changed from working out from the furnace in a collection_radius to using the whole grid. 
+                # This reflect using all of the available forest which is more realistic (it also runs much faster)
+                # This means using grid.__iter__
+                # for HexGridMulti, __iter__ returns a list of agents at the same coordinate
+                # We need to look through this list (it will have 2 elements at most) to see which is a forest land cell.
+                for cell_list in self.model.grid.__iter__():
+                    neighbor = cell_list[0]
+                    if len(cell_list)>0:
+                        for counter in range(0 , len(cell_list)):
+                            if cell_list[counter].type == "forest":
+                                neighbor = cell_list[counter]
                     if neighbor.type == "forest":
                     #if neighbor.isForest() == True:
                         if neighbor.isForestMature() == True:
@@ -140,7 +150,7 @@ class Furnace(Agent): # The furnace consumes charcoal.
                                     if chn.isForestMature() == True:
                                         ch_possible_cut_cells.append(chn)
                                         if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
-                                            print("cut for hearth",len(ch_possible_cut_cells),self.cells_cut_for_charcoal_hearth)
+                                            #print("cut for hearth",len(ch_possible_cut_cells),self.cells_cut_for_charcoal_hearth)
                                             break
                     # Indented twice
                             if(len(ch_possible_cut_cells)>=self.cells_cut_for_charcoal_hearth):
@@ -166,7 +176,7 @@ class Furnace(Agent): # The furnace consumes charcoal.
                                            self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
                                     else:
                                         # try to use the neighbour of the mill as the place to built a hearth, but only if it has no hearth aleady
-                                        if neighbor.has_charcoal_hearth == 0:
+                                        if neighbor.isForest and neighbor.has_charcoal_hearth == 0:
                                             if neighbor.x == chn.x and neighbor.y == chn.y:
                                                 new_cell_for_charcoal_hearth_neighbor_available = True
 
@@ -190,12 +200,14 @@ class Furnace(Agent): # The furnace consumes charcoal.
                         # end indented
                     if self.charcoal_loads_produced_this_year >= self.required_charcoal_loads_per_year:
                         break
-        # At the end of this year, did furnace harvest enough?            
+        # At the end of this year, did furnace harvest enough?
+        # Taking this out for now, to allow the simulation to recycle         
+        """
         if self.charcoal_loads_produced_this_year < self.required_charcoal_loads_per_year:
             self._nextState = 0
             print("Furnace is out of business!")
             self.color = "grey"
-
+        """   
     def advance(self):
         """
         Set the state to the new computed state -- computed in step().

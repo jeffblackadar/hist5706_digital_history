@@ -35,8 +35,10 @@ class LandCell(Agent):
         # +int _nextState The state this will be at the end of a step
         self.isConsidered = False
         # +bool isConsidered Determines if this is considered for processing.        
-        self.color = init_color
+        self.color = init_color        
         # +str color The background color of the cell. Changes with setColor()       
+        self.color_number = (0,90,0)
+        # +int color decimal number cell
         self.type = "forest"
         # +str type The type of this agent (forest)
         self.charcoal_hearth = 0
@@ -48,15 +50,20 @@ class LandCell(Agent):
 
         if self.state == self.NOTFOREST:
             self.color = "black"
+            self.color_number = (0,0,0)
         else:
             if self.state == self.FORESTMATURE:
                 self.color = "darkgreen"
+                self.color_number = (0,90,0)
             else:
                 if self.state == self.FORESTCUT:
                     self.color = "brown"
+                    self.color_number = (90,90,0)
                 else:
                     if self.state == self.FORESTYOUNG:
-                        strhex = hex(230-(round(self.forest_age / self.model.forest_age_maturity * 130)))
+                        young_green = 230-(round(self.forest_age / self.model.forest_age_maturity * 130))
+                        self.color_number = (0,young_green,0)
+                        strhex = hex(young_green)
                         #print(round(self.forest_age / self.FORESTAGEMATURE))
                         strhex = strhex[2:]
                         #strhex = "lightgreen"
@@ -65,6 +72,13 @@ class LandCell(Agent):
                         #print("00"+strhex+"00")
                     else:
                         self.color = "pink"
+     
+    def getColorNumber(self):
+
+
+
+
+         return self.color_number
 
     @property
     def isForest(self):        
