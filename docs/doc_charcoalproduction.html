@@ -24,7 +24,10 @@ classDiagram
     class CharcoalProductionMap
 CharcoalProductionMap : +add_cell(self, x,y)
 CharcoalProductionMap : +__init__(self, height=50, width=50, required_charcoal_loads_per_year=2, cells_cut_for_charcoal_hearth=3,collection_radius=3, forest_age_maturity=30, hexgrid = True)
-CharcoalProductionMap : +object grid HexGrid a grid to represent the map.
+CharcoalProductionMap :  +object schedule
+CharcoalProductionMap :  +object grid HexGrid a grid to represent the map.
+CharcoalProductionMap :  +int forest_age_maturity the age forest becomes mature and ready to be cut
+CharcoalProductionMap :  +int total_cut the total amount of acres cut
 CharcoalProductionMap : +step(self)
         </div>
 <h2>Agent: Furnace class</h2>
@@ -136,6 +139,8 @@ class LCFM3 S_LANDCELL_FYOUNG;
 classDiagram
     class CharcoalHearth
 CharcoalHearth : +__init__(self, pos, model)
+CharcoalHearth :  +int x position
+CharcoalHearth :  +int y
 CharcoalHearth :  +int state FIRED = 1, RELICT = 0, BUILT = 2
 CharcoalHearth : +setColor(self)
 CharcoalHearth : +neighbors(self)

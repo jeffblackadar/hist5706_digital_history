@@ -62,18 +62,19 @@ class CharcoalProductionMap(Model):
         # be done because each cell's next state depends on the current
         # state of all its neighbors -- before they've changed.
         self.schedule = SimultaneousActivation(self)
-
+        # +object schedule 
         # Use a hexagonal grid, where edges don't wrap around (it's a map of a part of the earth's surface).
         if hexgrid == False:
             self.grid = MultiGrid(width, height, torus=False)
         else:
             self.grid = HexGridMulti(width, height, torus=False)
-        
-        #+object grid HexGrid a grid to represent the map.
+        # +object grid HexGrid a grid to represent the map.
 
-        #self.cellsConsumed = 0
         self.forest_age_maturity = forest_age_maturity
+        # +int forest_age_maturity the age forest becomes mature and ready to be cut
+
         self.total_cut = 0
+        # +int total_cut the total amount of acres cut
 
         # Place a land cell at each location.
         
@@ -144,13 +145,7 @@ class CharcoalProductionMap(Model):
 
 
                 """
-        # activate the center(ish) cell.
-        #centerishCell = self.grid[width // 2][height // 2]
 
-        #centerishCell.state = 0
-        #centerishCell.setColor()
-        #for a in centerishCell.neighbors:
-        #    a.isConsidered = True
 
         print("required_charcoal_loads_per_year: ",required_charcoal_loads_per_year)
         #self, pos, model, init_state=RUNNING, required_charcoal_loads_per_year=REQLOADS, cells_cut_for_charcoal_hearth=CELLSFORHEARTH,collection_radius=3):

@@ -25,10 +25,12 @@ class CharcoalHearth(Agent):
         super().__init__(pos, model)
         
         self.x, self.y = pos
-        #print(self.x, self.y)
-        self.type = "charcoal_hearth"        
+        # +int x position
+        # +int y
+        self.type = "charcoal_hearth" 
+        # +str type The type of this agent (charcoal_hearth)       
         self.unique_id = self.type + ("000"+str(self.x))[-3:]+("000"+str(self.y))[-3:]
-        #print(self.unique_id)
+        # +str unique_id ex. charcoal_hearth00x00y
         self.state = self.BUILT
         # +int state FIRED = 1, RELICT = 0, BUILT = 2
         self.color = "orange"
