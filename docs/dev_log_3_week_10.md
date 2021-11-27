@@ -40,7 +40,7 @@ A side effect was that the agents start from the bottom left, like below:
 
 ![agents starting from the bottom left](dl3_3.png)
 
-No problem! Cells are stored in the model using an x, y loop in model.py
+No problem! (I thought then.) Cells are stored in the model using an x, y loop in model.py
 
 ```
         for (contents, x, y) in self.grid.coord_iter():
