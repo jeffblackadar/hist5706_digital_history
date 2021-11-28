@@ -1,11 +1,5 @@
 # Documentation
 
-## Devlogs
-
-+ [dev log week 7](dev_log_1_week_7.md)
-+ [dev log week 9](dev_log_2_week_9.md)
-+ [dev log week 10](dev_log_3_week_10.md)
-
 ## Models
 
 + [charcoalproduction](doc_charcoalproduction.html)
@@ -14,6 +8,12 @@
 ## Paradata
 
 Not done yet [paradata](paradata.md)
+
+## Devlogs
+
++ [dev log week 7](dev_log_1_week_7.md)
++ [dev log week 9](dev_log_2_week_9.md)
++ [dev log week 10](dev_log_3_week_10.md)
 
 ## Devlogs - Details
 
