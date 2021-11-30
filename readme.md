@@ -19,15 +19,23 @@ This simulation requires Python to be installed on a machine that can launch a l
 
 See the Installation section in this [tutorial](https://mesa.readthedocs.io/en/stable/tutorials/intro_tutorial.html#installation).
 
+or:
+```
+$ pip install pipenv
+$ pipenv install mesa
+```
+
 ### 2. Clone this repository
 
-+ Make a directory
-+ git init .
-+ git pull https://github.com/jeffblackadar/hist5706_digital_history.git
++ Make a directory. cd to the directory. Then:
+```
+$git init .
+$git pull https://github.com/jeffblackadar/hist5706_digital_history.git
+```
 
 # Models
 
-There are two models, mill and charcoal production.
+There are two models, Mill and CharcoalProduction.
 
 ## Mill model
 
@@ -37,7 +45,9 @@ This is a prototype model meant try out Mesa and build a basic model of consumpt
 
 ### Running the Mill model
 
-python run_mill.py
+```
+$ python run_mill.py
+```
 
 ## CharoalProduction model
 This is a model of chacoal production for an iron furnace in the Eastern United States during the 18th to mid-19th centuries.
@@ -48,6 +58,11 @@ This is a model of chacoal production for an iron furnace in the Eastern United 
 
 + change directory to /charcoalproduction
 + python run_charcoalproduction.py
+```
+$ cd charcoalproduction
+$ python run_charcoalproduction.py
+```
+
 
 ### Other programs
 
@@ -56,17 +71,12 @@ This is a model of chacoal production for an iron furnace in the Eastern United 
 + portrayal.py - Contains information to render the classes in the html visualization.
 
 #### Mesa Class addition
-+ HexGridMulti.py - HexGridMulti is an additional class added to the Mesa grid classes so that cells in a Hexagon grid may contain more than 1 agemt at time.
++ HexGridMulti.py - HexGridMulti is an additional class added to the Mesa grid classes so that cells in a Hexagon grid may contain more than 1 agent at time.
 
 #### Utilities
  
-+ run_iron_p.py, + server_image.py - Run a simple image based simulation. This is a prototype that was abandoned.
++ run_iron_p.py, server_image.py - Run a simple image based simulation. This is a prototype that was abandoned.
 + documenter_charcoalproduction.py - Creates an html page of documentation of the classes using Mermaid.
 + model_init_image.py - A prototype of logic to add agents in order from the center of a grid outwards.
 + workbook.ipynb - Contains calculations to inform the model's paradata.
-+ charcoalhearth_paradata_workbook - Also contains calculations to inform the model's paradata. (These two will be merged.)
-
-
-
-
-
++ charcoalhearth_paradata_workbook.ipynb - Also contains calculations to inform the model's paradata. (These two will be merged.)
