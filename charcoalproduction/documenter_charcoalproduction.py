@@ -69,6 +69,7 @@ write_f.write((CharcoalHearth.__doc__).replace('#',"</p>"))
 process_class(os.path.join(thisdir,'charcoalhearth.py'), write_f)
 include_html_file(os.path.join(thisdir, '..','docs','doc_charcoalhearth.html'), write_f)
 
+include_html_file(os.path.join(thisdir, '..','docs','doc_modellogic.html'), write_f)
 write_f.write('<hr>Back to <a href="https://jeffblackadar.github.io/hist5706_digital_history/">Documentation page</a>.')
 write_f.write('  </body>\n')
 write_f.write('</html>\n')

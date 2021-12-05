@@ -29,19 +29,29 @@ def compute_furnace_forest_average_age(model):
 
 class CharcoalProductionMap(Model):
     """
-    # Map:
+    # The model contains these four classes, detailed below.
+    
+    # Map / CharcoalProductionMap Class:
+    
     Represents the hex grid of cells. The grid is represented by a 2-dimensional array of cells with adjacency rules specific to hexagons.
 
-    # Furnace:
+    # Furnace / Furnace Class:
+    
     The furnace is at the center of the map.
     When colliers cut down the forest to make charcoal in a neighbouring cell, that cell's forest's age becomes 0 and is not mature.
 
-    # land Cell:
+    # Map Hexagon / LandCell Class:
+    
     Each hexagon represents a single area of forest in the simulation.
     
-    The land cell is most often a forest that can be mature (above the age of a mature forest and ready to cut) or young (not read to cut)
+    The land cell is most often a forest that can be mature (above the age of forest maturity and ready to cut) or young (not read to cut).
     The land cell where the furnace is located is not a forest.
-    The age of the forest increases each year and is displayed in the cell. The color of the cell is determined by land cell state or forest age. 
+    The age of the forest increases each year or model step. The color of the cell is determined by land cell state and forest age. 
+    A land cell may contain a charcoal hearth.
+
+    # Charcoal Hearth / CharcoalHearth Class: 
+    
+    A land cell hexagon may contain a charcoal hearth. A charcoal hearth may have a states of: built meiler (a pile of wood), fired charcoal hearth or relict.
     """
     def add_cell(self, x,y):
         print(x,y)

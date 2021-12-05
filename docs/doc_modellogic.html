@@ -1,0 +1,54 @@
+<html>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+
+<h3>Model Logic</h3>
+<div class="mermaid">
+graph TD
+    classDef S_CHM fill:#fff,color:#000
+    classDef S_FURNACE fill:#000,color:#fff
+    classDef S_LANDCELL fill:#060,color:#fff
+    classDef S_HEARTH fill:#ee0,color:#000
+    classDef S_MP fill:#37b,color:#fff,stroke:#37b
+    subgraph CHM1["CharcoalProductionMap HexGrid default 60 x 50. Change in server.py "]
+        MFURNACE1{{"Furnace"}}
+        MLANDCELL1{{"Land Cell"}}
+        MHEARTH1(("Charcoal Hearth"))
+        class MFURNACE1 S_FURNACE;
+        class MLANDCELL1 S_LANDCELL;
+        class MHEARTH1 S_HEARTH;
+        MFURNACE1-->FD1{"Does<br>Furnance<br>need more<br>charcoal?"}
+        MP1("Model Parameter:<br>Required number of loads of charcoal to run furnace each year")
+        MP2("Model Parameters:<br>Acres cut to supply a charcoal hearth for a season<br>Radius from charcoal hearth of cut area")
+        MP4("Age the forest becomes mature")
+        class MP1 S_MP;
+        class MP2 S_MP;
+        class MP4 S_MP;
+        MP1-->|+ -|FD1
+        MP2-->|+ -|MHEARTH1
+        MP4-->|+ -|MLANDCELL1
+        FD1-->FD2{Is an<br>existing<br>Relict Charcoal Hearth<br>near sufficient<br>mature forest<br>to produce<br>charcoal?}
+        FD2-->|Yes|FD3["Cut wood. Set LandCell state = cut. Set forest age = 0.<br>Rebuild Charcoal Hearth. Set state = built."]
+        FD3-->|Set state = cut<br>set age = 0|MLANDCELL1
+        FD3-->|Set state = built|MHEARTH1
+        FD3-->FD1
+        FD2-->|No|FD4{Is there a<br>sufficient area<br>of mature forest<br>to produce<br>charcoal?}
+        FD4-->|Yes|FD5["Cut wood. Set LandCell state = cut. Set forest age = 0.<br>Create and build Charcoal Hearth. Set state = built."]
+        FD4-->FD1
+        FD5-->|Set state = cut<br>set age = 0|MLANDCELL1
+        FD5-->|Set state = built|MHEARTH1
+        FD4-->|No|FD6["Forest depleted.<br>Insufficient charcoal produced.<br>Furnace is out of business. [1]"]
+        FD6-->|Set state = 0|MFURNACE1
+        
+    end
+    class CHM1 S_CHM;
+</div>
+<h4>Model Logic References</h4>
+<p>[1] Robert B. Gordon, American Iron, p. 40. This out of business function in the model is based on the example the Union blast furnace consuming all of the wood available in the surrounding forest and going out of business.
+    
+
+
+
+
+

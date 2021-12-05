@@ -202,12 +202,12 @@ class Furnace(Agent): # The furnace consumes charcoal.
                         break
         # At the end of this year, did furnace harvest enough?
         # Taking this out for now, to allow the simulation to recycle         
-        """
+
         if self.charcoal_loads_produced_this_year < self.required_charcoal_loads_per_year:
             self._nextState = 0
             print("Furnace is out of business!")
             self.color = "grey"
-        """   
+
     def advance(self):
         """
         Set the state to the new computed state -- computed in step().
