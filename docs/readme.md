@@ -7,7 +7,7 @@
 
 ## Paradata
 
-Not done yet [paradata](paradata.md)
+[paradata](paradata.htm)
 
 ## Devlogs
 
