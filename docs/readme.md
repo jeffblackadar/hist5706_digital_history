@@ -7,7 +7,7 @@
 
 ## Paradata
 
-[paradata](paradata.htm)
+[paradata](paradata.pdf)
 
 ## Devlogs
 
