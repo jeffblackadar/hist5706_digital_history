@@ -139,9 +139,8 @@ class LCFM3 S_LANDCELL_FYOUNG;
     Represents a single charcoal hearth that is situated in an area of forest (LandCell) in the simulation.
 
     The charcoal hearth may be in any type of forest and has three states: 
-    built (the meiler is constructed from wood cut in neighboring cells), 
-    Fired (a transitory state to produce charcoal), 
-    Relict (A charcoal hearth that was fired previously.)   
+    Active = 1: The meiler is constructed from wood cut in neighboring cell and fired to produce charcoal.
+    Relict = 0: A charcoal hearth that was fired previously.
     
     Attributes:
         See comments below in __init__
@@ -151,17 +150,19 @@ classDiagram
 CharcoalHearth : +__init__(self, pos, model)
 CharcoalHearth :  +int x position
 CharcoalHearth :  +int y
-CharcoalHearth :  +int state FIRED = 1, RELICT = 0, BUILT = 2
+CharcoalHearth :  +int state ACTIVE = 1, RELICT = 0
+CharcoalHearth :  +int _nextState The state this will be at the end of a step
 CharcoalHearth : +setColor(self)
 CharcoalHearth : +neighbors(self)
 CharcoalHearth : +neighbors_outer(self, radius)
 CharcoalHearth : +considered(self)
-CharcoalHearth : +step(self)
-CharcoalHearth : +advance(self)
         </div>
 
 
 <h3>Charcoal Hearths</h3>
+
+A charcoal hearth has 2 states: Relict (dormant) and Active (built and fired).
+
 <h4>Relict Charcoal Hearth</h4>
 A relict charcoal hearth can be located on any type of forest cell.
 <div class="mermaid">
@@ -177,16 +178,16 @@ class RCH2 S_LANDCELL_FCUT;
 class RCH3 S_LANDCELL_FYOUNG;
 </div>
 
-<h4>Fired Charcoal Hearth</h4>
-A fired charcoal hearth can be located on any type of forest cell.
+<h4>Active Charcoal Hearth</h4>
+An active charcoal hearth can be located on any type of forest cell.
 <div class="mermaid">
 graph TD
 classDef S_LANDCELL_FMATURE fill:#060,color:#ff0
 classDef S_LANDCELL_FCUT fill:#660,color:#ff0
 classDef S_LANDCELL_FYOUNG fill:#0e0,color:#ff0
-RCHFMATURE["Fired Charcoal Hearth<br>on Forest, Mature."]-->RCH1{{"O"}}
-RCHFCUT["Fired Charcoal Hearth<br>on Forest, Cut."]-->RCH2{{"O"}}
-RCHFYOUNG["Fired Charcoal Hearth<br>on Forest, Young."]-->RCH3{{"O"}}
+RCHFMATURE["Active Charcoal Hearth<br>on Forest, Mature."]-->RCH1{{"O"}}
+RCHFCUT["Active Charcoal Hearth<br>on Forest, Cut."]-->RCH2{{"O"}}
+RCHFYOUNG["Active Charcoal Hearth<br>on Forest, Young."]-->RCH3{{"O"}}
 class RCH1 S_LANDCELL_FMATURE;
 class RCH2 S_LANDCELL_FCUT;
 class RCH3 S_LANDCELL_FYOUNG;
@@ -210,7 +211,7 @@ class MLANDCELL1 S_LANDCELL;
 class MHEARTH1 S_HEARTH;
 MFURNACE1-->FD1{"Does<br>Furnance<br>need more<br>charcoal?"}
 MP1("Model Parameter:<br>Required number of loads of charcoal to run furnace each year")
-MP2("Model Parameters:<br>Acres cut to supply a charcoal hearth for a season<br>Radius from charcoal hearth of cut area")
+MP2("Model Parameters:<br>Acres cut to supply a charcoal hearth for a season<br>Radius from charcoal hearth of cut area [2, 3]")
 MP4("Age the forest becomes mature")
 class MP1 S_MP;
 class MP2 S_MP;
@@ -235,7 +236,9 @@ end
 class CHM1 S_CHM;
 </div>
 <h4>Model Logic References</h4>
-<p>[1] Robert B. Gordon, American Iron, p. 40. "This behaviour is based on the example the Union blast furnace consuming all of the wood available in the surrounding forest and going out of business."
+<p>[1] Robert B. Gordon, <i>American Iron, 1607-1900</i>, (Baltimore: Johns Hopkins University Press, 2019), 40. This out of business function in the model is based on the example the Union blast furnace consuming all of the wood available in the surrounding forest and going out of business.
+<p>[2] Victor R. Rolando, "19th-Century Charcoal Production in Vermont," IA. The Journal of the Society for Industrial Archeology 17, no. 2 (1991): 15. Charcoal was produced nearby where trees were cut and delivered to the furnace soon after it was made.
+<p>[3] Rolando, "19th-Century Charcoal Production in Vermont," 16. An acre of forest contained 30 cords of wood for charcoal on average.
 
 
 

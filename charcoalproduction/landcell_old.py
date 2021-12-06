@@ -1,5 +1,6 @@
 from mesa import Agent
 
+
 class LandCell(Agent):
     """ 
     Represents a single area of forest in the simulation.
@@ -63,12 +64,20 @@ class LandCell(Agent):
                         young_green = 230-(round(self.forest_age / self.model.forest_age_maturity * 130))
                         self.color_number = (0,young_green,0)
                         strhex = hex(young_green)
+                        #print(round(self.forest_age / self.FORESTAGEMATURE))
                         strhex = strhex[2:]
+                        #strhex = "lightgreen"
+                        #self.color = "00"+strhex+"00"
                         self.color = "#00"+strhex+"00"
+                        #print("00"+strhex+"00")
                     else:
                         self.color = "pink"
      
     def getColorNumber(self):
+
+
+
+
          return self.color_number
 
     @property
@@ -109,6 +118,10 @@ class LandCell(Agent):
                 if self.state == self.FORESTMATURE:
                     self.forest_age = self.forest_age + 1
         self.setColor()
+        if self.has_charcoal_hearth == 1:
+            self.charcoal_hearth.setColor() 
+        #print(self.forest_age)      
+  
 
     def advance(self):
         """

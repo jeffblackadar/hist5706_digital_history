@@ -1,4 +1,5 @@
 from mesa import Agent
+#from charcoalproduction.charcoalhearth import CharcoalHearth
 from charcoalhearth import CharcoalHearth
 
 class Furnace(Agent): # The furnace consumes charcoal.
@@ -54,6 +55,7 @@ class Furnace(Agent): # The furnace consumes charcoal.
     def neighbors(self):
         return self.model.grid.neighbor_iter((self.x, self.y))
 
+
     def neighbors_outer(self, radius):
         return self.model.grid.iter_neighbors((self.x, self.y),False,radius)       
     
@@ -69,20 +71,19 @@ class Furnace(Agent): # The furnace consumes charcoal.
         return self.isConsidered is True
 
     def step(self):
-
+        """
+        Only cells that are considered check their neighbors for performance reasons.
+        """
         # assume no state change
-        self._nextState = self.state
+        self._nextState = self.state        
+
         self.cells_cut = 0
+        # number of charcoal hearths the furnace needs in operation
+        #ch_need = 2
         self.charcoal_loads_produced_this_year = 0
         
         # counter of the number of charcoal hearths in operation this step
         ch_built = 0
-
-        # The start of the furnace's step or year, all hearths are Relict after winter.
-        for ch in self.charcoal_hearths:
-            # set all hearths to relict
-            ch.state = ch.RELICT
-            ch.setColor()
 
         # is furnace running?
         if self.state > 0:
@@ -93,7 +94,8 @@ class Furnace(Agent): # The furnace consumes charcoal.
                 
                     # find out if there is enough harvestable wood to make charcoal
                     # Make a list of possible harvest cells
-                    ch_possible_cut_cells = []               
+                    ch_possible_cut_cells = []
+                
                 
                     chns = self.model.grid.iter_neighbors((ch.x, ch.y), True,self.collection_radius)
 
@@ -112,10 +114,9 @@ class Furnace(Agent): # The furnace consumes charcoal.
                             chn.setColor()
                             chn.isConsidered = True
                             self.cells_cut = self.cells_cut + 1
-                        # make hearth active
-                        ch._nextState = ch.RELICT
-                        ch.state = ch.ACTIVE
-                        ch.setColor()                        
+                        # build the hearth
+                        ch.state = ch.BUILT
+                        ch.setColor()
                         self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
                         ch_built = ch_built + 1
                 if self.charcoal_loads_produced_this_year >= self.required_charcoal_loads_per_year:
@@ -123,7 +124,11 @@ class Furnace(Agent): # The furnace consumes charcoal.
 
             # do we need to harvest more from a place with no charcoal hearths?
             if self.charcoal_loads_produced_this_year < self.required_charcoal_loads_per_year:
-                # for neighbor in self.neighbors_outer(self.collection_radius):
+
+            # change for performance reasons
+            # should loop though max_cut times
+            
+                #for neighbor in self.neighbors_outer(self.collection_radius):
                 # Changed from working out from the furnace in a collection_radius to using the whole grid. 
                 # This reflect using all of the available forest which is more realistic (it also runs much faster)
                 # This means using grid.__iter__
@@ -135,7 +140,8 @@ class Furnace(Agent): # The furnace consumes charcoal.
                         for counter in range(0 , len(cell_list)):
                             if cell_list[counter].type == "forest":
                                 neighbor = cell_list[counter]
-                    if neighbor.type == "forest":                    
+                    if neighbor.type == "forest":
+                    #if neighbor.isForest() == True:
                         if neighbor.isForestMature() == True:
                             ch_possible_cut_cells = []
                             chns = self.model.grid.iter_neighbors((neighbor.x, neighbor.y), True,self.collection_radius)
@@ -164,17 +170,17 @@ class Furnace(Agent): # The furnace consumes charcoal.
                                         # only a relict hearth can be rebuilt.  Built or fired hearths can't
                                         if chn.charcoal_hearth.state == chn.charcoal_hearth.RELICT:
                                            # Fire up existing hearth
-                                           chn.charcoal_hearth._nextState = chn.charcoal_hearth.RELICT
-                                           chn.charcoal_hearth.state = chn.charcoal_hearth.ACTIVE
+                                           chn.charcoal_hearth.state = chn.charcoal_hearth.BUILT
                                            chn.charcoal_hearth.setColor()
-                                           chn.charcoal_hearth.isConsidered = True                                           
                                            charcoal_hearth_present_in_cut_area = True
                                            self.charcoal_loads_produced_this_year = self.charcoal_loads_produced_this_year + 1
                                     else:
                                         # try to use the neighbour of the mill as the place to built a hearth, but only if it has no hearth aleady
                                         if neighbor.isForest and neighbor.has_charcoal_hearth == 0:
                                             if neighbor.x == chn.x and neighbor.y == chn.y:
-                                                new_cell_for_charcoal_hearth_neighbor_available = True                                                 
+                                                new_cell_for_charcoal_hearth_neighbor_available = True
+
+                                                 
                                         new_cell_for_charcoal_hearth = chn
 
                                 # The neighbor cell is the best choice, if it was found, use it.          
@@ -182,11 +188,12 @@ class Furnace(Agent): # The furnace consumes charcoal.
                                     new_cell_for_charcoal_hearth = neighbor
 
                                 if charcoal_hearth_present_in_cut_area == False:
+
                                     charcoal_hearth = CharcoalHearth(new_cell_for_charcoal_hearth.pos, self)
-                                    charcoal_hearth.state = charcoal_hearth.ACTIVE
-                                    charcoal_hearth.setColor()                                    
+                                    charcoal_hearth.state = charcoal_hearth.BUILT
+                                    charcoal_hearth.setColor()
                                     self.model.grid.place_agent(charcoal_hearth, new_cell_for_charcoal_hearth.pos)
-                                    # charcoal_hearth is not added to the scheduler. It's steps and schedule is managed by the furnace                                    
+                                    self.model.schedule.add(charcoal_hearth)
                                     new_cell_for_charcoal_hearth.has_charcoal_hearth = 1
                                     new_cell_for_charcoal_hearth.charcoal_hearth = charcoal_hearth
                                     self.charcoal_hearths.append(charcoal_hearth)

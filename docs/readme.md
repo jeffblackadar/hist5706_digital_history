@@ -7,7 +7,7 @@
 
 ## Paradata
 
-[paradata](paradata.pdf)
+[paradata](paradata2.md)
 
 ## Devlogs
 
