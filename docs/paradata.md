@@ -9,7 +9,7 @@ I have been studying the archaeological evidence of the charcoal making industry
 This project attempts to simulate the work of colliers and loggers who produced charcoal to better understand the pattern of distribution of charcoal hearths and relate that to the archaeological record. A greater understanding of the pattern of construction of charcoal hearths leads to better estimates of historical charcoal production, especially in areas that are now developed where the evidence of RCH has been built or plowed over. This simulation will also explore how work was accomplished in an industry vital to the economic development of the United
 States and to better understand the history of its workers.
 
-I use Agent Based Modelling or ABM for this simulation. [[1]](#-ftn1) To perform ABM I considered three options: [NetLogo](https://ccl.northwestern.edu/netlogo/), an ABM written in Java with its own modelling language with the same name; [Hash.ai](https://hash.ai/), an ABM on-line platform and Mesa, an ABM framework for Python. [[2]](#-ftn2) I wanted ABM software that was extensible, open and portable, so I ruled out Hash.ai since it required users to store models on its platform. I chose Mesa because its Python code seemed more readily extensible than Netlogo's Java application. I prefer using Python, which has an established and large user base with historians, rather than using NetLogo, which, while being a well-established language for ABM, appears to have a smaller community of users overall.
+I use Agent Based Modelling or ABM for this simulation. [1](#-ftn1) To perform ABM I considered three options: [NetLogo](https://ccl.northwestern.edu/netlogo/), an ABM written in Java with its own modelling language with the same name; [Hash.ai](https://hash.ai/), an ABM on-line platform and Mesa, an ABM framework for Python. ["[2]"](#-ftn2) I wanted ABM software that was extensible, open and portable, so I ruled out Hash.ai since it required users to store models on its platform. I chose Mesa because its Python code seemed more readily extensible than Netlogo's Java application. I prefer using Python, which has an established and large user base with historians, rather than using NetLogo, which, while being a well-established language for ABM, appears to have a smaller community of users overall.
 
 I hoped to program and use models on Google Collaboratory since it has Python already installed. However, early in my work with Mesa, I saw Mesa's web visualization would not work on Google Colab. Instead, I made the model work on a personal computer. I programmed it on a PC and tested it on both a PC and a Chromebook. I first made a simple model of a lumber mill to test concepts and develop my knowledge before modelling an iron furnace's charcoal consumption.
 
@@ -41,8 +41,6 @@ Figure 1 _above_ This is a model that has run for three steps.
 5. The black circle is a relict charcoal hearth. It is not active since it does not have at least 2 cells of mature forest within the "Radius from charcoal hearth of cut area".
 6. This forest cell is cut.
 7. These forest cells are young. They can't be harvested until they are mature. For this model, maturity is set at twenty years.
-
-## References
 
 ## References
 
@@ -99,10 +97,10 @@ Van Rossum, G., & Drake, F. L. _Python 3 Reference Manual_. Scotts Valley, CA: C
 
 ***
 
-[[1]](#-ftnref1)Shawn Graham, _An Enchantment of Digital Archaeology: Raising the Dead with Agent-Based Models,Archaeogamingand Artificial Intelligence_ (New York: Berghahn
+[1](#-ftnref1)Shawn Graham, _An Enchantment of Digital Archaeology: Raising the Dead with Agent-Based Models,Archaeogamingand Artificial Intelligence_ (New York: Berghahn
 Books, 2020). The idea to use ABM came from this book.
 
-[[2]](#-ftnref2) Jackie Kazil, David Masad and Andrew Crooks. Mesa: Agent-Based Modeling in Python 3+. Python. 2014. Reprint, Project Mesa, 2021. [https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib](https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib).
+["[2]"](#-ftnref2) Jackie Kazil, David Masad and Andrew Crooks. Mesa: Agent-Based Modeling in Python 3+. Python. 2014. Reprint, Project Mesa, 2021. [https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib](https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib).
 
 [[3]](#-ftnref3) Victor R. Rolando, "19th-Century Charcoal Production in Vermont," IA. The Journal of the Society for Industrial Archeology 17, no. 2 (1991): 15-16.
 

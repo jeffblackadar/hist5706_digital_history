@@ -46,7 +46,7 @@ class CharcoalProductionMap(Model):
 
     # Charcoal Hearth / CharcoalHearth Class: 
     
-    A land cell hexagon may contain a charcoal hearth. A charcoal hearth may have a states of: built meiler (a pile of wood), fired charcoal hearth or relict.
+    A land cell hexagon may contain a charcoal hearth. A charcoal hearth may have a states of: Active (a meiler built and fired) or Relict.
     """
     def add_cell(self, x,y):
         print(x,y)
