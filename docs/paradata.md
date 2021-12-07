@@ -97,8 +97,7 @@ Van Rossum, G., & Drake, F. L. _Python 3 Reference Manual_. Scotts Valley, CA: C
 
 ***
 
-<a name="-ftnref1">1</a> Shawn Graham, _An Enchantment of Digital Archaeology: Raising the Dead with Agent-Based Models,Archaeogamingand Artificial Intelligence_ (New York: Berghahn
-Books, 2020). The idea to use ABM came from this book.
+<a name="-ftn1">1</a> Shawn Graham, _An Enchantment of Digital Archaeology: Raising the Dead with Agent-Based Models,Archaeogamingand Artificial Intelligence_ (New York: Berghahn Books, 2020). The idea to use ABM came from this book.
 
 ["[2]"](#-ftnref2) Jackie Kazil, David Masad and Andrew Crooks. Mesa: Agent-Based Modeling in Python 3+. Python. 2014. Reprint, Project Mesa, 2021. [https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib](https://github.com/projectmesa/mesa/blob/ab3cec5b788104d2dad6f27434f1fadfb8a7452f/CITATION.bib).
 
