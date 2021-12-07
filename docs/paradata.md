@@ -96,6 +96,7 @@ Van Rossum, G., & Drake, F. L. _Python 3 Reference Manual_. Scotts Valley, CA: C
 
 
 ***
+### Footnotes
 
 <a name="-ftn1">1</a> Shawn Graham, _An Enchantment of Digital Archaeology: Raising the Dead with Agent-Based Models,Archaeogamingand Artificial Intelligence_ (New York: Berghahn Books, 2020). The idea to use ABM came from this book.
 
