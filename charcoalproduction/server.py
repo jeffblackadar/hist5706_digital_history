@@ -21,12 +21,9 @@ from model import CharcoalProductionMap
 
 # As a proxy for 12,000 acres, use 3000 acres since it's easier to see
 width, height = 60, 50
-width, height = 30, 25
-width, height = 10, 10
-
 
 # Make a map on a x,y display.
-canvas_element = CanvasHexGrid(portrayAgent, width, height, 500, 500)
+canvas_element = CanvasHexGrid(portrayAgent, width, height, 600, 500)
 
 # for set up as a rectangular grid
 #canvas_element = CanvasGrid(portrayAgent, width, height, 600, 600)
