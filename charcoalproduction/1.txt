@@ -1,8 +1,0 @@
-1.txt				  model_init_image.py
-HexGridMulti.py			  portrayal.py
-__pycache__			  run_charcoalproduction.py
-charcoalhearth.py		  run_iron_p.py
-documenter_charcoalproduction.py  server.py
-furnace.py			  server_image.py
-landcell.py			  workbook.ipynb
-model.py

@@ -7,7 +7,8 @@ Agent based modeling of the manufacturing of charcoal in forested areas of the e
 
 ## Documentation
 
-[Documentation](https://jeffblackadar.github.io/hist5706_digital_history/)
++ [Documentation](https://jeffblackadar.github.io/hist5706_digital_history/)
++ [Paradata](https://jeffblackadar.github.io/hist5706_digital_history/paradata.html)
 
 ## Installation
 
