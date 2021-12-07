@@ -1,7 +1,11 @@
-A Slow Burn: Paradata for a Model of Charcoal Production in the Eastern United States.
+# A Slow Burn: Paradata for a Model of Charcoal Production in the Eastern United States.
+
 Jeff Blackadar 100139943
+
 HIST5706F Digital History
-Dr.Shawn Graham
+
+Dr. Shawn Graham
+
 December 5, 2021
 
 I have been studying the archaeological evidence of the charcoal making industry that fueled iron production in the eastern United States from its colonial period until the mid-nineteenth century, when it was gradually replaced by bituminous coal. In areas where iron was produced, such as Western Maryland, Pennsylvania, Northern New Jersey, Connecticut, Vermont and Eastern New York State, forested areas contain numerous relict charcoal hearths (RCH) distributed across the landscape.
