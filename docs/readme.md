@@ -7,7 +7,7 @@
 
 ## Paradata
 
-[paradata](paradata2.md)
++ [paradata](paradata.md)
 
 ## Devlogs
 

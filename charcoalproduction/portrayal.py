@@ -17,7 +17,9 @@ def portrayAgent(agent):
         (x, y) = agent.pos
         portrayal["x"] = x
         portrayal["y"] = y
-        portrayal["Color"] = agent.color   
+        portrayal["Color"] = agent.color
+        portrayal["text"] = agent.label
+        portrayal["text_color"] = "White"  
 
     if agent.type=="furnace":
         portrayal = {"Shape": "hex", "r": 1, "Filled": "true", "Layer": 0}

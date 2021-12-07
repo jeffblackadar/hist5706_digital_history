@@ -44,20 +44,25 @@ class LandCell(Agent):
         # +object charcoal_hearth This landcell's charcoal hearth, if present
         self.has_charcoal_hearth = 0
         # +bool has_charcoal_hearth This landcell has a charcoal hearth
+        self.label = ""
+        # +str label The label to be displayed on the visualization
 
     def setColor(self):
 
         if self.state == self.NOTFOREST:
             self.color = "black"
             self.color_number = (0,0,0)
+            self.label = ""
         else:
             if self.state == self.FORESTMATURE:
                 self.color = "darkgreen"
                 self.color_number = (0,90,0)
+                self.label = "Mature"
             else:
                 if self.state == self.FORESTCUT:
                     self.color = "brown"
                     self.color_number = (90,90,0)
+                    self.label = "Cut"
                 else:
                     if self.state == self.FORESTYOUNG:
                         young_green = 230-(round(self.forest_age / self.model.forest_age_maturity * 130))
@@ -65,9 +70,10 @@ class LandCell(Agent):
                         strhex = hex(young_green)
                         strhex = strhex[2:]
                         self.color = "#00"+strhex+"00"
+                        self.label = "Age: "+str(self.forest_age)
                     else:
                         self.color = "pink"
-     
+
     def getColorNumber(self):
          return self.color_number
 

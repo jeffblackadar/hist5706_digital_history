@@ -2,17 +2,12 @@ from mesa import Model
 from mesa.time import SimultaneousActivation
 # changing to HexGridMulti
 # from mesa.space import HexGrid
-#from charcoalproduction.HexGridMulti import HexGridMulti
+# from charcoalproduction.HexGridMulti import HexGridMulti
 from HexGridMulti import HexGridMulti
 from HexGridMulti import MultiGrid
 
 from mesa.datacollection import DataCollector
 
-"""
-from charcoalproduction.landcell import LandCell
-from charcoalproduction.furnace import Furnace
-from charcoalproduction.charcoalhearth import CharcoalHearth
-"""
 from landcell import LandCell
 from furnace import Furnace
 from charcoalhearth import CharcoalHearth
@@ -93,69 +88,7 @@ class CharcoalProductionMap(Model):
                 land_cell = LandCell((x, y), self)
                 self.grid.place_agent(land_cell, (x, y))
                 self.schedule.add(land_cell)
-        """
-        # place agents from the center outwards 
-        center_y = height // 2
-        center_x = width // 2
-
-        y_plus = center_y 
-        y_minus = center_y 
-        x_plus = center_x
-        x_minus = center_x 
-
-        while y_plus < height or y_minus >= 0 or x_plus < width or x_minus >= 0:
-
-            y_plus = y_plus + 1
-            y_minus = y_minus - 1
-            x_plus = x_plus + 1
-            x_minus = x_minus - 1
-            print(y_minus, y_plus,x_minus, x_plus)
-            
-            if y_minus >= 0:                
-                x_low = x_minus
-                if x_minus < 0:
-                    x_low = 0
-                x_high = x_plus +1
-                if x_high > width:
-                    x_high = width
-                for xcounter in range(x_low,x_high):
-                    print(1)
-                    self.add_cell(xcounter,y_minus)
-
-            if y_plus < height:                
-                x_low = x_minus
-                if x_minus < 0:
-                    x_low = 0
-                x_high = x_plus +1
-                if x_high > width:
-                    x_high = width
-                for xcounter in range(x_low,x_high):
-                    print(2)
-                    self.add_cell(xcounter,y_plus)
-            if x_minus >= 0:                
-                y_low = y_minus + 1
-                if y_low < 0:
-                    y_low = 0
-                y_high = y_plus 
-                if y_high > height:
-                    y_high = height
-                for ycounter in range(y_low,y_high):
-                    print(3)
-                    self.add_cell(x_minus,ycounter)
-            if x_plus < width:
-                y_low = y_minus + 1
-                if y_low < 0:
-                    y_low = 0
-                y_high = y_plus 
-                if y_high > height:
-                    y_high = height
-                for ycounter in range(y_low,y_high):
-                    print(4)
-                    self.add_cell(x_plus,ycounter)            
-
-
-                """
-
+        
 
         print("required_charcoal_loads_per_year: ",required_charcoal_loads_per_year)
         #self, pos, model, init_state=RUNNING, required_charcoal_loads_per_year=REQLOADS, cells_cut_for_charcoal_hearth=CELLSFORHEARTH,collection_radius=3):
@@ -173,7 +106,6 @@ class CharcoalProductionMap(Model):
 
         self.running = True
         self.datacollector.collect(self)
-
 
     def step(self):
         """
